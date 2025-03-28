@@ -26,7 +26,7 @@ services:
       - 5055:5055/tcp # jellyseer
       - 8191:8191/tcp # flaresolverr
     networks:
-      - arrs
+      - default
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
@@ -120,7 +120,7 @@ services:
     #  qbittorrent:
     #    condition: service_healthy
 networks:
-  arrs:
+  default:
     driver: bridge
     ipam:
       config:
