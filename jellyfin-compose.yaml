@@ -5,8 +5,8 @@ services:
     container_name: jellyfin
     hostname: jellyfin
     networks:
-      arrs_arrs:
-        ipv4_address: 173.25.0.41
+      #arrs_arrs:
+      #  ipv4_address: 173.25.0.41
       default: null
     environment:
       - PUID=1000
