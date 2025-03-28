@@ -1,4 +1,4 @@
-# Push from Komodo
+# Push from Komodo 🦎
 services:
   dockge:
     image: louislam/dockge
