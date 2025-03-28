@@ -30,8 +30,8 @@ services:
               capabilities:
                 - gpu
 networks:
-  arrs_arrs:
-    external: true
+  #arrs_arrs:
+  #  external: true
   default:
     name: proxy
     external: true
