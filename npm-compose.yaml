@@ -1,0 +1,48 @@
+services:
+  npm:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: npm
+    restart: always
+    networks:
+      static:
+        ipv4_address: 172.7.7.5
+      default: null
+      arrs_default: null
+    environment:
+      DB_MYSQL_HOST: npmdb
+      DB_MYSQL_PORT: ${DB_MYSQL_PORT}
+      DB_MYSQL_USER: ${DB_MYSQL_USER}
+      DB_MYSQL_PASSWORD: ${DB_MYSQL_PASSWORD}
+      DB_MYSQL_NAME: ${DB_MYSQL_NAME}
+      # Uncomment this if IPv6 is not enabled on your host
+      # DISABLE_IPV6: 'true'
+    ports:
+      - 80:80
+      - 443:443
+      - 81:81
+    volumes:
+      - ${STACKS_PATH}/npm/data:/data
+      - ${STACKS_PATH}/npm/letsencrypt:/etc/letsencrypt
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    depends_on:
+      - npmdb
+  npmdb:
+    image: jc21/mariadb-aria:latest
+    restart: always
+    container_name: npmdb
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_MYSQL_NAME}
+      MYSQL_USER: ${DB_MYSQL_USER}
+      MYSQL_PASSWORD: ${DB_MYSQL_PASSWORD}
+    volumes:
+      - ${STACKS_PATH}/npm/mysql:/var/lib/mysql
+networks:
+  default:
+    name: proxy
+    external: true
+  static:
+    external: true
+  arrs_default:
+    external: true
