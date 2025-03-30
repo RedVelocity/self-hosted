@@ -16,6 +16,7 @@ services:
     ports:
       - 8200:8200
     restart: unless-stopped
-    networks:
-      proxy:
-        external: true
+networks:
+  default:
+    name: proxy
+    external: true
