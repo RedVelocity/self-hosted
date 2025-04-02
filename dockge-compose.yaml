@@ -9,7 +9,7 @@ services:
       - 5001:5001
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./data:/app/data
+      - ${STACKS_PATH}/dockge/data:/app/data
       - ${STACKS_PATH}:/opt/stacks
     environment:
       # Tell Dockge where to find the stacks
