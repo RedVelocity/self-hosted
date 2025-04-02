@@ -27,6 +27,7 @@ services:
       - 8191:8191/tcp # flaresolverr
     networks:
       - default
+      - proxy
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
@@ -120,6 +121,8 @@ services:
     #  qbittorrent:
     #    condition: service_healthy
 networks:
+  proxy:
+    external: true
   default:
     driver: bridge
     ipam:
