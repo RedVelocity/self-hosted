@@ -21,6 +21,11 @@ services:
       - 7359:7359
       - 1900:1900
     restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.jellyfin.entrypoints=web
+      - traefik.http.routers.jellyfin.rule=Host(`ag.home`)
+      - traefik.http.services.jellyfin.loadbalancer.server.port=8096
     deploy:
       resources:
         reservations:
