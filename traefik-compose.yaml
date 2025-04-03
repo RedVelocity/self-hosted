@@ -17,6 +17,11 @@ services:
         ipv4_address: 172.7.7.5
       default: null
     restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.traefik.entrypoints=web
+      - traefik.http.routers.traefik.rule=Host(`traefik.home`)
+      - traefik.http.services.traefik.loadbalancer.server.port=8080
 networks:
   default:
     name: proxy
