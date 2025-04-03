@@ -16,6 +16,10 @@ services:
     ports:
       - 8200:8200
     restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.duplicati.entrypoints=web
+      - traefik.http.routers.duplicati.rule=Host(`duplicati.home`)
 networks:
   default:
     name: proxy
