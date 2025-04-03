@@ -28,6 +28,23 @@ services:
     networks:
       - default
       - proxy
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.qb.entrypoints=web
+      - traefik.http.routers.qb.rule=Host(`qb.home`)
+      - traefik.http.services.qb.loadbalancer.server.port=8080
+      - traefik.http.routers.prowlarr.entrypoints=web
+      - traefik.http.routers.prowlarr.rule=Host(`prowlarr.home`)
+      - traefik.http.services.prowlarr.loadbalancer.server.port=9696
+      - traefik.http.routers.radarr.entrypoints=web
+      - traefik.http.routers.radarr.rule=Host(`rad.home`)
+      - traefik.http.services.radarr.loadbalancer.server.port=7878
+      - traefik.http.routers.sonarr.entrypoints=web
+      - traefik.http.routers.sonarr.rule=Host(`son.home`)
+      - traefik.http.services.sonarr.loadbalancer.server.port=8989
+      - traefik.http.routers.js.entrypoints=web
+      - traefik.http.routers.js.rule=Host(`js.home`)
+      - traefik.http.services.js.loadbalancer.server.port=5055
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
