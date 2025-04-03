@@ -14,6 +14,10 @@ services:
     environment:
       # Tell Dockge where to find the stacks
       - DOCKGE_STACKS_DIR=/opt/stacks
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.dockge.entrypoints=web
+      - traefik.http.routers.dockge.rule=Host(`dockge.home`)
 networks:
   default:
     name: proxy
