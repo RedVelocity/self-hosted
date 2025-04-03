@@ -17,7 +17,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.dockge.entrypoints=web
-      - traefik.http.routers.dockge.rule=Host(`dockge.home`)
+      - traefik.http.routers.dockge.rule=Host(`dock.home`)
 networks:
   default:
     name: proxy
