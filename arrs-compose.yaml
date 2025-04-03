@@ -35,7 +35,7 @@ services:
       - traefik.http.routers.qb.service=qb
       - traefik.http.services.qb.loadbalancer.server.port=8080
       - traefik.http.routers.prowlarr.entrypoints=web
-      - traefik.http.routers.prowlarr.rule=Host(`prowlarr.home`)
+      - traefik.http.routers.prowlarr.rule=Host(`prowl.home`)
       - traefik.http.routers.prowlarr.service=prowlarr
       - traefik.http.services.prowlarr.loadbalancer.server.port=9696
       - traefik.http.routers.radarr.entrypoints=web
