@@ -15,10 +15,10 @@ services:
       - '7575:7575'
     labels:
       - traefik.enable=true
-      - traefik.http.routers.homarr.entrypoints=websecure
-      - traefik.http.routers.homarr.rule=Host(`dash.esh.racer.red`)
-      - traefik.http.routers.homarr.tls=true
-      - traefik.http.routers.homarr.tls.certresolver=cloudflare
+      - traefik.http.routers.homarr.entrypoints=web
+      - traefik.http.routers.homarr.rule=Host(`${HOST_DOMAIN}`)
+      # - traefik.http.routers.homarr.tls=true
+      # - traefik.http.routers.homarr.tls.certresolver=cloudflare
 networks:
   default:
     name: proxy
