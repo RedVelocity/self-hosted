@@ -19,9 +19,11 @@ services:
     restart: unless-stopped
     labels:
       - traefik.enable=true
-      - traefik.http.routers.traefik.entrypoints=web
-      - traefik.http.routers.traefik.rule=Host(`traefik.home`)
+      - traefik.http.routers.traefik.entrypoints=websecure
+      - traefik.http.routers.traefik.rule=Host(`traefik.esh.racer.red`)
       - traefik.http.services.traefik.loadbalancer.server.port=8080
+      - traefik.http.routers.traefik-secure.tls.domains[0].main=esh.racer.red
+      - traefik.http.routers.traefik-secure.tls.domains[0].sans=*.esh.racer.red
 networks:
   default:
     name: proxy
