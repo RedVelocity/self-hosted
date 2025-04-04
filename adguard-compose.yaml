@@ -19,7 +19,6 @@ services:
       - traefik.http.routers.adguard.entrypoints=websecure
       - traefik.http.routers.adguard.rule=Host(`ag.esh.racer.red`)
       - traefik.http.routers.adguard.tls=true
-      - traefik.http.routers.adguard.tls.certresolver=cloudflare
       - traefik.http.services.adguard.loadbalancer.server.port=5002
 networks:
   default:
