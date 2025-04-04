@@ -16,8 +16,9 @@ services:
       - DOCKGE_STACKS_DIR=/opt/stacks
     labels:
       - traefik.enable=true
-      - traefik.http.routers.dockge.entrypoints=web
-      - traefik.http.routers.dockge.rule=Host(`dock.home`)
+      - traefik.http.routers.dockge.entrypoints=websecure
+      - traefik.http.routers.dockge.rule=Host(`dock.esh.racer.red`)      
+      - traefik.http.routers.traefik-secure.tls=true
 networks:
   default:
     name: proxy
