@@ -16,8 +16,10 @@ services:
     image: adguard/adguardhome
     labels:
       - traefik.enable=true
-      - traefik.http.routers.adguard.entrypoints=web
-      - traefik.http.routers.adguard.rule=Host(`ag.home`)
+      - traefik.http.routers.adguard.entrypoints=websecure
+      - traefik.http.routers.adguard.rule=Host($DOMAIN_HOST)
+      - traefik.http.routers.adguard.tls=true
+      - traefik.http.routers.adguard.tls.certresolver=cloudflare
       - traefik.http.services.adguard.loadbalancer.server.port=5002
 networks:
   default:
