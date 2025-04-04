@@ -10,8 +10,8 @@ services:
       - /run/docker.sock:/run/docker.sock:ro
       - ${STACKS_PATH}/traefik/config:/etc/traefik:ro
       - ${STACKS_PATH}/traefik/certs:/var/traefik/certs
-    #environment:
-    #- CF_DNS_API_TOKEN=your-cloudflare-api-token  # <-- Change this to your Cloudflare API Token
+    environment:
+      - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}  # <-- Change this to your Cloudflare API Token
     networks:
       static:
         ipv4_address: 172.7.7.5
