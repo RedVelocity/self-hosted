@@ -75,10 +75,10 @@ services:
         - curl
         - -f
         - http://localhost:8080
-      interval: 15s # Check every 15 seconds
-      timeout: 15s # Timeout if the check takes more than 14 seconds
-      retries: 8 # Retry up to 5 times before marking the service unhealthy
-      start_period: 15s # Wait 10 seconds before starting the first health check
+      interval: 30s # Check every 15 seconds
+      timeout: 30s # Timeout if the check takes more than 14 seconds
+      retries: 5 # Retry up to 5 times before marking the service unhealthy
+      start_period: 30s # Wait 10 seconds before starting the first health check
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest # Change to "latest" for stable
     container_name: prowlarr
