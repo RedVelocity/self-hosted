@@ -92,13 +92,13 @@ services:
       - ${DOWNLOADS_PATH}:/data/downloads
     restart: unless-stopped
     network_mode: service:gluetun
-  flaresolverr:
-    image: ghcr.io/flaresolverr/flaresolverr:latest
-    container_name: flaresolverr
-    environment:
-      - TZ=Europe/Madrid
-    restart: unless-stopped
-    network_mode: service:gluetun
+  # flaresolverr:
+  #   image: ghcr.io/flaresolverr/flaresolverr:latest
+  #   container_name: flaresolverr
+  #   environment:
+  #     - TZ=Europe/Madrid
+  #   restart: unless-stopped
+  #   network_mode: service:gluetun
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest # Change to "latest" for stable
     container_name: sonarr
