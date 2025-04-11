@@ -7,8 +7,6 @@ services:
     networks:
       arrs_default:
         ipv4_address: 173.25.0.41
-      static:
-        ipv4_address: 172.7.7.4
       default: null
     environment:
       - PUID=1000
@@ -39,8 +37,6 @@ services:
                 - gpu
 networks:
   arrs_default:
-    external: true
-  static:
     external: true
   default:
     name: proxy
