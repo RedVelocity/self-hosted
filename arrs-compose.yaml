@@ -24,7 +24,8 @@ services:
       - 7878:7878/tcp # radarr
       - 8989:8989/tcp # sonarr
       - 5055:5055/tcp # jellyseer
-      - 8191:8191/tcp # flaresolverr
+      # - 8191:8191/tcp # flaresolverr
+      - 6767:6767/tcp # bazarr
     networks:
       - default
       - proxy
@@ -149,8 +150,6 @@ services:
       - ${STACKS_PATH}/arrs/bazarr/config:/config
       - ${MOVIES_PATH}:/movies #optional
       - ${TV_PATH}:/tv #optional
-    ports:
-      - 6767:6767
     restart: unless-stopped
     network_mode: service:gluetun
   jellyseerr:
