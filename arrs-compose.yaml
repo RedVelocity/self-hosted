@@ -148,8 +148,8 @@ services:
       - TZ=Etc/UTC
     volumes:
       - ${STACKS_PATH}/arrs/bazarr/config:/config
-      - ${MOVIES_PATH}:/movies #optional
-      - ${TV_PATH}:/tv #optional
+      - ${MOVIES_PATH}:/data/movies #optional
+      - ${TV_PATH}:/data/tvshows #optional
     restart: unless-stopped
     network_mode: service:gluetun
   jellyseerr:
