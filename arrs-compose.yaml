@@ -29,6 +29,7 @@ services:
     networks:
       - default
       - proxy
+    restart: unless-stopped
     labels:
       - traefik.enable=true
       - traefik.http.routers.qb.entrypoints=websecure
@@ -73,7 +74,7 @@ services:
     volumes:
       - ${STACKS_PATH}/arrs/qbit:/config
       - ${DOWNLOADS_PATH}:/data/downloads
-    restart: always
+    restart: unless-stopped
     network_mode: service:gluetun
     healthcheck:
       test:
