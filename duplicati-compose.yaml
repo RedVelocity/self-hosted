@@ -12,7 +12,7 @@ services:
     volumes:
       - ${STACKS_PATH}/duplicati/config:/config
       - ${BACKUP_PATH}:/backups
-      - ${STACKS_PATH}:/source
+      - ${STACKS_PATH}:/source:ro
     ports:
       - 8200:8200
     restart: unless-stopped
