@@ -5,8 +5,8 @@ services:
     container_name: jellyfin
     hostname: jellyfin
     networks:
-      #arrs_default:
-      #  ipv4_address: 173.25.0.41
+      arrs_default:
+        ipv4_address: 173.25.0.41
       default: null
     environment:
       - PUID=1000
@@ -36,8 +36,8 @@ services:
               capabilities:
                 - gpu
 networks:
-  #arrs_default:
-  #  external: true
+  arrs_default:
+    external: true
   default:
     name: proxy
     external: true
