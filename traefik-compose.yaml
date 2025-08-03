@@ -26,6 +26,15 @@ services:
       - traefik.http.routers.traefik-secure.tls.certresolver=cloudflare
       - traefik.http.routers.traefik-secure.tls.domains[0].main=esh.racer.red
       - traefik.http.routers.traefik-secure.tls.domains[0].sans=*.esh.racer.red
+      # Homepage Config
+      - homepage.group=Network & DNS
+      - homepage.name=Traefik
+      - homepage.icon=traefik-proxy
+      - homepage.href=${HOMEPAGE_URL}
+      - homepage.description=Traefik
+      - homepage.widget.type=traefik
+      - homepage.widget.url=${HOMEPAGE_URL}
+      - homepage.widget.fields=["routers", "services", "middleware"]
 networks:
   default:
     name: proxy
