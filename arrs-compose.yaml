@@ -66,12 +66,16 @@ services:
       - homepage.group=Media
       - homepage.name=Media
       - homepage.icon=sonarr.svg
-      - homepage.href=${HOMEPAGE_SON_URL}
-      - homepage.description=Sonarr
+      #- homepage.href=${HOMEPAGE_SON_URL}
+      - homepage.description=Media
       - homepage.widget[0].type=sonarr
       - homepage.widget[0].url=${HOMEPAGE_SON_URL}
       - homepage.widget[0].key=${HOMEPAGE_SON_KEY}
       - homepage.widget[0].fields=["wanted", "queued", "series"]
+      - homepage.widget[1].type=radarr
+      - homepage.widget[1].url=${HOMEPAGE_RAD_URL}
+      - homepage.widget[1].key=${HOMEPAGE_RAD_KEY}
+      - homepage.widget[1].fields=["wanted", "queued", "movies"]
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
