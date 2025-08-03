@@ -1,0 +1,28 @@
+services:
+  adguardhome:
+    container_name: adguard
+    restart: unless-stopped
+    networks:
+      static:
+        ipv4_address: 172.7.7.7
+      default: null
+    volumes:
+      - ${STACKS_PATH}/adguard/work:/opt/adguardhome/work
+      - ${STACKS_PATH}/adguard/conf:/opt/adguardhome/conf
+    ports:
+      - 53:53/tcp
+      - 53:53/udp
+      - 5002:5002/tcp
+    image: adguard/adguardhome
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.adguard.entrypoints=websecure
+      - traefik.http.routers.adguard.rule=Host(`ag.esh.racer.red`)
+      - traefik.http.routers.adguard.tls=true
+      - traefik.http.services.adguard.loadbalancer.server.port=5002
+networks:
+  default:
+    name: proxy
+    external: true
+  static:
+    external: true
