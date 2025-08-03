@@ -1,0 +1,34 @@
+services:
+  traefik:
+    image: docker.io/library/traefik:latest
+    container_name: traefik
+    ports:
+      - 80:80
+      - 443:443
+      - 9090:8080
+    volumes:
+      - /run/docker.sock:/run/docker.sock:ro
+      - ${STACKS_PATH}/traefik/config:/etc/traefik:ro
+      - ${STACKS_PATH}/traefik/certs:/var/traefik/certs
+    environment:
+      - CF_DNS_API_TOKEN=${CF_DNS_API_TOKEN}  # <-- Change this to your Cloudflare API Token
+    networks:
+      static:
+        ipv4_address: 172.7.7.5
+      default: null
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.traefik.entrypoints=websecure
+      - traefik.http.routers.traefik.rule=Host(`traefik.esh.racer.red`)
+      - traefik.http.services.traefik.loadbalancer.server.port=8080
+      - traefik.http.routers.traefik-secure.tls=true
+      - traefik.http.routers.traefik-secure.tls.certresolver=cloudflare
+      - traefik.http.routers.traefik-secure.tls.domains[0].main=esh.racer.red
+      - traefik.http.routers.traefik-secure.tls.domains[0].sans=*.esh.racer.red
+networks:
+  default:
+    name: proxy
+    external: true
+  static:
+    external: true
