@@ -29,7 +29,7 @@ services:
       # Homepage Config
       - homepage.group=Network & DNS
       - homepage.name=Traefik
-      - homepage.icon=traefik-proxy
+      - homepage.icon=traefik-proxy.svg
       #- homepage.href=${HOMEPAGE_URL}
       - homepage.description=Traefik
       - homepage.widget.type=traefik
