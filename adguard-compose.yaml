@@ -20,17 +20,6 @@ services:
       - traefik.http.routers.adguard.rule=Host(`ag.esh.racer.red`)
       - traefik.http.routers.adguard.tls=true
       - traefik.http.services.adguard.loadbalancer.server.port=5002
-      # Homepage Config
-      - homepage.group=Network & DNS
-      - homepage.name=Adguard
-      - homepage.icon=adguard-home.svg
-      - homepage.href=${HOMEPAGE_AG_URL}
-      - homepage.description=Adguard Home
-      - homepage.widget.type=adguard
-      - homepage.widget.url=${HOMEPAGE_AG_URL}
-      - homepage.widget.username=${HOMEPAGE_AG_UNAME}
-      - homepage.widget.password=${HOMEPAGE_AG_PW}
-      - homepage.widget.fields=["queries", "blocked", "filtered", "latency"]
 networks:
   default:
     name: proxy
