@@ -12,6 +12,7 @@ services:
     ports:
       - 5005:3000
     volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
       - ${STACKS_PATH}/homepage/config:/app/config
 #      - ./images:/app/images  # for custom background images
 #      - ./icons:/app/icons  # for custom icons
