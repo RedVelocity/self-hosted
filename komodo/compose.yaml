@@ -9,7 +9,7 @@
 
 services:
   mongo:
-    image: mongo
+    image: mongo:8.0.6
     container_name: komodo-db
     labels:
       komodo.skip: null # Prevent Komodo from stopping with StopAllContainers
@@ -31,7 +31,12 @@ services:
     image: ghcr.io/moghtech/komodo-core:${COMPOSE_KOMODO_IMAGE_TAG:-latest}
     container_name: komodo-core
     labels:
-      komodo.skip: null # Prevent Komodo from stopping with StopAllContainers
+      - komodo.skip=null # Prevent Komodo from stopping with StopAllContainers
+      - traefik.enable=true
+      - traefik.http.routers.komodo.entrypoints=websecure
+      - traefik.http.routers.komodo.rule=Host(`komo.esh.racer.red`)
+      - traefik.http.services.komodo.loadbalancer.server.port=9120
+      - traefik.http.routers.komodo.tls=true
     restart: unless-stopped
     depends_on:
       - mongo
@@ -85,7 +90,7 @@ services:
       ## Mount external docker socket
       - /var/run/docker.sock:/var/run/docker.sock
       - ${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}:${PERIPHERY_ROOT_DIRECTORY:-/etc/komodo}
-      - ${STACKS_PATH}:/etc/komodo/stacks
+      - /mnt/d/Docker/stacks:/etc/komodo/stacks
 networks:
   default: {}
   proxy:
