@@ -66,6 +66,7 @@ services:
       - homepage.group=Media
       - homepage.name=Media
       - homepage.icon=sonarr.svg
+      - homepage.type=sonarr
       #- homepage.href=${HOMEPAGE_SON_URL}
       - homepage.description=Media
       - homepage.widget[0].type=sonarr
