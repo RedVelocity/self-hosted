@@ -16,6 +16,11 @@ services:
 #      - ./images:/app/images  # for custom background images
 #      - ./icons:/app/icons  # for custom icons
     restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.homarr.entrypoints=websecure
+      - traefik.http.routers.homarr.rule=Host(`home.esh.racer.red`)
+      - traefik.http.routers.homarr.tls=true
 #   (Optional) For secure docker socket integration
 #   dockerproxy:
 #     image: ghcr.io/tecnativa/docker-socket-proxy:0.3.0
