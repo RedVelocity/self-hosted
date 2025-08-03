@@ -30,10 +30,10 @@ services:
       - homepage.group=Network & DNS
       - homepage.name=Traefik
       - homepage.icon=traefik-proxy
-      - homepage.href=${HOMEPAGE_URL}
+      #- homepage.href=${HOMEPAGE_URL}
       - homepage.description=Traefik
       - homepage.widget.type=traefik
-      - homepage.widget.url=${HOMEPAGE_URL}
+      #- homepage.widget.url=${HOMEPAGE_URL}
       - homepage.widget.fields=["routers", "services", "middleware"]
 networks:
   default:
