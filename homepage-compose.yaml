@@ -21,7 +21,6 @@ services:
       - traefik.http.routers.homepage.entrypoints=websecure
       - traefik.http.routers.homepage.rule=Host(`home.esh.racer.red`)
       - traefik.http.routers.homepage.tls=true
-      - traefik.http.services.homepage.loadbalancer.server.port=5005
 #   (Optional) For secure docker socket integration
 #   dockerproxy:
 #     image: ghcr.io/tecnativa/docker-socket-proxy:0.3.0
@@ -36,3 +35,7 @@ services:
 #     volumes:
 #       - /run/docker.sock:/run/docker.sock:ro # Mounted as read-only
 #     restart: unless-stopped
+networks:
+  default:
+    name: proxy
+    external: true
