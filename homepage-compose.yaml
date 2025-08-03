@@ -6,9 +6,6 @@ services:
       # (Required) See https://gethomepage.dev/installation/#homepage_allowed_hosts
       - HOMEPAGE_ALLOWED_HOSTS=${HOMEPAGE_ALLOWED_HOSTS:?HOMEPAGE_ALLOWED_HOSTS not set}
       - LOG_LEVEL=info
-    # (Optional) Run as a specific user
-      - PUID=1000
-      - PGID=1000
     ports:
       - 5005:3000
     volumes:
