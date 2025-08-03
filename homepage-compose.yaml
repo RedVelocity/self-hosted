@@ -10,7 +10,7 @@ services:
       - PUID=1000
       - PGID=1000
     ports:
-      - 3000:3000
+      - 5005:3000
     volumes:
       - ${STACKS_PATH}/homepage/config:/app/config
 #      - ./images:/app/images  # for custom background images
@@ -18,9 +18,10 @@ services:
     restart: unless-stopped
     labels:
       - traefik.enable=true
-      - traefik.http.routers.homarr.entrypoints=websecure
-      - traefik.http.routers.homarr.rule=Host(`home.esh.racer.red`)
-      - traefik.http.routers.homarr.tls=true
+      - traefik.http.routers.homepage.entrypoints=websecure
+      - traefik.http.routers.homepage.rule=Host(`home.esh.racer.red`)
+      - traefik.http.routers.homepage.tls=true
+      - traefik.http.services.homepage.loadbalancer.server.port=5005
 #   (Optional) For secure docker socket integration
 #   dockerproxy:
 #     image: ghcr.io/tecnativa/docker-socket-proxy:0.3.0
