@@ -22,7 +22,3 @@ docker network create --driver=bridge --subnet=172.5.5.0/24 proxy
 
 This means your chosen subnet overlaps with an existing Docker network or your LAN. Choose a different subnet range.
 
-### View existing networks:
-```bash
-docker network inspect <network_name>
-```
