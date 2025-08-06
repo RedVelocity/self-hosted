@@ -11,7 +11,7 @@ docker network create --driver=bridge --subnet=172.7.7.0/24 static
 ```
 
 ### 2. For containers behind a reverse proxy
-For example, if you are using Traefik to route traffic.
+For example, if you are using [Traefik](https://doc.traefik.io/traefik/) to route traffic.
 
 ```bash
 docker network create --driver=bridge --subnet=172.5.5.0/24 proxy
