@@ -2,7 +2,7 @@
 
 This subfolder provides a **Traefik v2/v3** reverse proxy implementation to front-end your Docker‑Compose applications.
 
-Traefik automatically discovers containers, handles TLS (Let's Encrypt), and routes traffic via Docker labels—perfect for configurable self-hosted stacks.:contentReference[oaicite:1]{index=1}
+Traefik automatically discovers containers, handles TLS (Let's Encrypt), and routes traffic via Docker labels—perfect for configurable self-hosted stacks.
 
 ---
 
