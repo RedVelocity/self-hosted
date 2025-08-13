@@ -1,0 +1,27 @@
+services:
+  duplicati:
+    image: lscr.io/linuxserver/duplicati:latest
+    container_name: duplicati
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Madrid
+      - SETTINGS_ENCRYPTION_KEY=${DUPLICATI_ENCRYPTION_KEY}
+      #- CLI_ARGS= #optional
+      - DUPLICATI__WEBSERVICE_PASSWORD=${DUPLICATI_PASSWORD}
+    volumes:
+      - ${STACKS_PATH}/duplicati/config:/config
+      - ${BACKUP_PATH}:/backups
+      - ${STACKS_PATH}:/source:ro
+    ports:
+      - 8200:8200
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.duplicati.entrypoints=websecure
+      - traefik.http.routers.duplicati.rule=Host(`duplicati.esh.racer.red`)
+      - traefik.http.routers.duplicati.tls=true
+networks:
+  default:
+    name: proxy
+    external: true
