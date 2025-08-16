@@ -63,7 +63,7 @@ services:
       - traefik.http.services.js.loadbalancer.server.port=5055
       - traefik.http.routers.js.tls=true
   qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:5
+    image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
     environment:
       - PUID=1000
@@ -154,7 +154,7 @@ services:
   #   restart: unless-stopped
   #   network_mode: service:gluetun
   jellyseerr:
-    image: fallenbagel/jellyseerr:2
+    image: fallenbagel/jellyseerr:latest
     container_name: jellyseerr
     environment:
       - PUID=1000
