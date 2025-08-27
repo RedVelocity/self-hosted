@@ -19,7 +19,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.duplicati.entrypoints=websecure
-      - traefik.http.routers.duplicati.rule=Host(`duplicati.esh.racer.red`)
+      - traefik.http.routers.duplicati.rule=Host(`${DUPLICATI_HOST}`)
       - traefik.http.routers.duplicati.tls=true
 networks:
   default:
