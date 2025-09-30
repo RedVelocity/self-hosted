@@ -1,6 +1,7 @@
 ---
 services:
   adguardhome:
+    image: adguard/adguardhome
     container_name: adguard
     restart: unless-stopped
     networks:
@@ -14,7 +15,6 @@ services:
       - 53:53/tcp
       - 53:53/udp
       - 5002:5002/tcp
-    image: adguard/adguardhome
     labels:
       - traefik.enable=true
       - traefik.http.routers.adguard.entrypoints=websecure
