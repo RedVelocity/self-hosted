@@ -1,6 +1,6 @@
 services:
   jellyfin:
-    image: lscr.io/linuxserver/jellyfin:10.10.0
+    image: lscr.io/linuxserver/jellyfin:latest
     container_name: jellyfin
     hostname: jellyfin
     networks:
