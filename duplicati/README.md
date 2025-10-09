@@ -30,6 +30,15 @@ ${STACKS_PATH}/
 ```
 
 ---
+## 🧱 Prerequisites
+
+Komodo uses a shared **`proxy`** network to communicate with other services (e.g., through Traefik or Gluetun-based stacks).  
+Before deploying, ensure this network exists:
+
+```bash
+docker network create --driver=bridge --subnet=172.5.5.0/24 proxy
+```
+---
 
 ## ⚙️ Environment Variables
 Create a .env file in the same directory as your docker-compose.yml:
