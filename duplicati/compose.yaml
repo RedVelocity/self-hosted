@@ -14,6 +14,7 @@ services:
       - ${STACKS_PATH}/duplicati/config:/config
       - ${BACKUP_PATH}:/backups
       - ${STACKS_PATH}:/source:ro
+      - ${STACKS_PATH}/duplicati/scripts:/scripts
       - /var/run/docker.sock:/var/run/docker.sock
     ports:
       - 8200:8200
