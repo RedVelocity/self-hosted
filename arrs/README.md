@@ -28,13 +28,17 @@ docker network create --driver=bridge --subnet=172.5.5.0/24 proxy
 
 ## Environment Variables
 ```bash
+# Gluetun VPN config
 VPN_SERVICE_PROVIDER=private internet access
 OPENVPN_USER=XXXXXXXX
 OPENVPN_PASSWORD=XXXXXXXX
 SERVER_REGIONS=Germany
+# Path to store arrs config
 STACKS_PATH=/srv/docker
+# Media path
 DOWNLOADS_PATH=/srv/downloads
 MOVIES_PATH=/srv/movies
 TV_PATH=/srv/tvshows
+# Base url for Traefik deployment
 ARRS_HOST=example.com
 ```
