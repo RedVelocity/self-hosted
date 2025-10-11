@@ -55,3 +55,46 @@ STACKS_PATH=/srv/docker
 BACKUP_PATH=/srv/backups
 
 DUPLICATI_HOST=duplicati.example.com
+```
+---
+
+## 🤖 Scripts
+
+### pre-backup.sh
+```bash
+#!/bin/bash
+echo "🔧 Stopping all containers except Duplicati..."
+
+# Get running containers except Duplicati
+containers=$(docker ps --format '{{.Names}}' | grep -v duplicati)
+
+if [ -n "$containers" ]; then
+  docker stop $containers
+else
+  echo "No other containers running."
+fi
+echo "✅ All other containers stopped."
+```
+
+### post-backup.sh
+```bash
+#!/bin/bash
+echo "🚀 Starting containers (ensuring Gluetun is first)..."
+
+# Start Gluetun first if stopped
+if ! docker ps --format '{{.Names}}' | grep -q '^gluetun$'; then
+  echo "Starting Gluetun..."
+  docker start gluetun
+  sleep 10  # Give it a few seconds to initialize
+fi
+
+# Then start other stopped containers except Duplicati and Gluetun
+containers=$(docker ps -a --format '{{.Names}}' --filter "status=exited" | grep -Ev 'duplicati|gluetun')
+
+if [ -n "$containers" ]; then
+  docker start $containers
+else
+  echo "No other containers to start."
+fi
+echo "✅ All containers started successfully."
+```
