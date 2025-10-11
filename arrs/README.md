@@ -23,3 +23,18 @@ Run:
 
 ```bash
 docker network create --driver=bridge --subnet=172.5.5.0/24 proxy
+```
+---
+
+## Environment Variables
+```bash
+VPN_SERVICE_PROVIDER=private internet access
+OPENVPN_USER=XXXXXXXX
+OPENVPN_PASSWORD=XXXXXXXX
+SERVER_REGIONS=Germany
+STACKS_PATH=/srv/docker
+DOWNLOADS_PATH=/srv/downloads
+MOVIES_PATH=/srv/movies
+TV_PATH=/srv/tvshows
+ARRS_HOST=example.com
+```
