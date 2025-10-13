@@ -4,16 +4,6 @@ This stack deploys **[Komodo](https://github.com/moghtech/komodo)** — a modern
 It includes the **Komodo Core**, **Komodo Periphery**, and **MongoDB** services, designed for seamless orchestration under Docker Compose and optional Traefik HTTPS access.
 
 ---
-
-## 🚀 Features
-
-- 🧩 One-command deployment of **Komodo Core**, **Periphery**, and **Mongo**
-- 🌐 Optional **Traefik** integration for HTTPS and routing
-- 🗄️ Persistent MongoDB storage
-- 🐳 Periphery with full Docker socket access for stack management
-- ⚙️ Environment-variable–driven configuration
-
----
 ## 🧱 Prerequisites
 
 Komodo uses a shared **`proxy`** network to communicate with other services (e.g., through Traefik or Gluetun-based stacks).  
