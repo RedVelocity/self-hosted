@@ -24,8 +24,12 @@ services:
       - traefik.http.services.traefik.loadbalancer.server.port=8080
       - traefik.http.routers.traefik-secure.tls=true
       - traefik.http.routers.traefik-secure.tls.certresolver=cloudflare
-      - traefik.http.routers.traefik-secure.tls.domains[0].main=${TRAEFIK_BASE_URL}
-      - traefik.http.routers.traefik-secure.tls.domains[0].sans=*.${TRAEFIK_BASE_URL}
+      # Base URL of your domain example.com
+      - traefik.http.routers.traefik-secure.tls.domains[0].main=${TRAEFIK_BASEURL}
+      - traefik.http.routers.traefik-secure.tls.domains[0].sans=*.${TRAEFIK_BASEURL}
+      # Base URL of your subdomain if applicable sub.example.com
+      - traefik.http.routers.traefik-secure.tls.domains[1].main=${TRAEFIK_BASEURL_SUB}
+      - traefik.http.routers.traefik-secure.tls.domains[1].sans=*.${TRAEFIK_BASEURL_SUB}
 networks:
   default:
     name: proxy
