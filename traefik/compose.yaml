@@ -20,12 +20,12 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.traefik.entrypoints=websecure
-      - traefik.http.routers.traefik.rule=Host(`traefik.esh.racer.red`)
+      - traefik.http.routers.traefik.rule=Host(`${TRAEFIK_HOST}`)
       - traefik.http.services.traefik.loadbalancer.server.port=8080
       - traefik.http.routers.traefik-secure.tls=true
       - traefik.http.routers.traefik-secure.tls.certresolver=cloudflare
-      - traefik.http.routers.traefik-secure.tls.domains[0].main=esh.racer.red
-      - traefik.http.routers.traefik-secure.tls.domains[0].sans=*.esh.racer.red
+      - traefik.http.routers.traefik-secure.tls.domains[0].main=${TRAEFIK_BASE_URL}
+      - traefik.http.routers.traefik-secure.tls.domains[0].sans=*.${TRAEFIK_BASE_URL}
 networks:
   default:
     name: proxy
