@@ -18,10 +18,11 @@ services:
       - traefik.http.routers.homarr.entrypoints=websecure
       - traefik.http.routers.homarr.rule=Host(`${HOMARR_HOST}`)
       - traefik.http.routers.homarr.tls=true
-      - traefik.http.routers.homarralt.entrypoints=websecure
-      - traefik.http.routers.homarralt.rule=Host(`${HOMARR_HOST_ALT}`)
-      - traefik.http.routers.homarralt.tls=true
-      #- traefik.http.routers.homarr.tls.certresolver=cloudflare
+      # Template labels for multi host/service Traefik deployment
+      # - traefik.http.routers.homarralt.entrypoints=websecure
+      # - traefik.http.routers.homarralt.rule=Host(`${HOMARR_HOST_ALT}`)
+      # - traefik.http.routers.homarralt.tls=true
+      # - traefik.http.routers.homarr.tls.certresolver=cloudflare
 networks:
   default:
     name: proxy
