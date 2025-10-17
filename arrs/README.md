@@ -17,7 +17,7 @@ Optional **Traefik** labels are included for reverse proxy setups.
 
 ## Prerequisites
 
-If you want Jellyseerr (running inside the Gluetun network) to communicate with other containers in your environment, you must have the **`proxy`** network created beforehand.
+You must have the **`proxy`** network created beforehand.
 
 Run:
 
