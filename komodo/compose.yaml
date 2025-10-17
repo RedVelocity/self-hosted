@@ -34,7 +34,7 @@ services:
       - komodo.skip=null # Prevent Komodo from stopping with StopAllContainers
       - traefik.enable=true
       - traefik.http.routers.komodo.entrypoints=websecure
-      - traefik.http.routers.komodo.rule=Host(`komo.esh.racer.red`)
+      - traefik.http.routers.komodo.rule=Host(`${KOMO_HOST}`)
       - traefik.http.services.komodo.loadbalancer.server.port=9120
       - traefik.http.routers.komodo.tls=true
     restart: unless-stopped
