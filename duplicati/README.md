@@ -5,16 +5,6 @@ It’s designed to back up your entire Docker stack safely — including configu
 
 ---
 
-## 🚀 Features
-
-- 🌐 Web UI via **Traefik** (secure HTTPS reverse proxy)
-- 🐳 Full Docker daemon access (via `/var/run/docker.sock`)
-- 🧠 Pre/post backup scripting support
-- 💾 Tailored for backup of all stack configurations
-- ⚙️ Configurable through `.env` variables
-
----
-
 ## 📂 Directory Structure
 
 ```bash
