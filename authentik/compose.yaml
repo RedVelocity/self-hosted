@@ -83,7 +83,7 @@ services:
     # (1000:1000 by default)
     user: root
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      # - /var/run/docker.sock:/var/run/docker.sock
       - ${STACKS_PATH}/authentik/media:/media
       - ${STACKS_PATH}/authentik/certs:/certs
       - ${STACKS_PATH}/authentik/custom-templates:/templates
