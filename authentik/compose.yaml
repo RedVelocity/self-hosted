@@ -47,6 +47,7 @@ services:
       AUTHENTIK_POSTGRESQL__USER: ${POSTGRES_USER}
       AUTHENTIK_POSTGRESQL__NAME: authentik
       AUTHENTIK_POSTGRESQL__PASSWORD: ${POSTGRES_PASSWORD}
+      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY:?secret key required}
     volumes:
       - ${STACKS_PATH}/authentik/media:/media
       - ${STACKS_PATH}/authentik/custom-templates:/templates
@@ -67,6 +68,7 @@ services:
       AUTHENTIK_POSTGRESQL__USER: ${POSTGRES_USER}
       AUTHENTIK_POSTGRESQL__NAME: authentik
       AUTHENTIK_POSTGRESQL__PASSWORD: ${POSTGRES_PASSWORD}
+      AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY:?secret key required}
     # `user: root` and the docker socket volume are optional.
     # See more for the docker socket integration here:
     # https://goauthentik.io/docs/outposts/integrations/docker
