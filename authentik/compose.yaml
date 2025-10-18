@@ -48,6 +48,12 @@ services:
       AUTHENTIK_POSTGRESQL__NAME: authentik
       AUTHENTIK_POSTGRESQL__PASSWORD: ${POSTGRES_PASSWORD}
       AUTHENTIK_SECRET_KEY: ${AUTHENTIK_SECRET_KEY:?secret key required}
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.authentik.entrypoints=websecure
+      - traefik.http.routers.authentik.rule=Host(`${AUTHENTIK_HOST}`)
+      - traefik.http.routers.authentik.tls=true
+      - traefik.http.services.authentik.loadbalancer.server.port=9000
     volumes:
       - ${STACKS_PATH}/authentik/media:/media
       - ${STACKS_PATH}/authentik/custom-templates:/templates
