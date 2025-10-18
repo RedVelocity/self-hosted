@@ -51,7 +51,7 @@ services:
       - ${STACKS_PATH}/authentik/media:/media
       - ${STACKS_PATH}/authentik/custom-templates:/templates
     ports:
-      - 9000:9000
+      - 9001:9000
       - 9444:9443
     depends_on:
       - postgresql
