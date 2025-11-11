@@ -42,7 +42,7 @@ services:
       - PGID=1000
       - TZ=Europe/Madrid
     volumes:
-      - ${STACKS_PATH}/arrs/jellyseerr:/app/config    
+      - ${STACKS_PATH}/jellyseerr:/app/config    
     networks:
       default: null
     restart: unless-stopped
