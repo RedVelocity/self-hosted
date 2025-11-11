@@ -23,7 +23,7 @@ services:
       - 9696:9696/tcp # prowlarr
       - 7878:7878/tcp # radarr
       - 8989:8989/tcp # sonarr
-      - 5055:5055/tcp # jellyseer
+      #- 5055:5055/tcp # jellyseer
       - 8191:8191/tcp # flaresolverr
       # - 6767:6767/tcp # bazarr
     networks:
@@ -57,11 +57,11 @@ services:
       # - traefik.http.routers.bazarr.service=bazarr
       # - traefik.http.services.bazarr.loadbalancer.server.port=6767
       # - traefik.http.routers.bazarr.tls=true
-      - traefik.http.routers.js.entrypoints=websecure
-      - traefik.http.routers.js.rule=Host(`js.${ARRS_HOST}`)
-      - traefik.http.routers.js.service=js
-      - traefik.http.services.js.loadbalancer.server.port=5055
-      - traefik.http.routers.js.tls=true
+      # - traefik.http.routers.js.entrypoints=websecure
+      # - traefik.http.routers.js.rule=Host(`js.${ARRS_HOST}`)
+      # - traefik.http.routers.js.service=js
+      # - traefik.http.services.js.loadbalancer.server.port=5055
+      # - traefik.http.routers.js.tls=true
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
     container_name: qbittorrent
@@ -154,20 +154,6 @@ services:
   #     - ${TV_PATH}:/data/tvshows #optional
   #   restart: unless-stopped
   #   network_mode: service:gluetun
-  jellyseerr:
-    image: fallenbagel/jellyseerr:latest
-    container_name: jellyseerr
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Madrid
-    volumes:
-      - ${STACKS_PATH}/arrs/jellyseerr:/app/config
-    restart: unless-stopped
-    network_mode: service:gluetun
-    #depends_on:
-    #  qbittorrent:
-    #    condition: service_healthy
 networks:
   proxy:
     external: true
