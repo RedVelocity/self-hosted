@@ -8,7 +8,6 @@ This stack includes:
 - **Sonarr**
 - **Radarr**
 - **Jellyseerr**
-- **FlareSolverr**
 
 All `arrs` services route through the **Gluetun** VPN container for privacy.  
 Optional **Traefik** labels are included for reverse proxy setups.
