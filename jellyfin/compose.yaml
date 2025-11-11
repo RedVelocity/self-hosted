@@ -4,8 +4,8 @@ services:
     container_name: jellyfin
     hostname: jellyfin
     networks:
-      arrs_default:
-        ipv4_address: 173.25.0.41
+      # arrs_default:
+      #   ipv4_address: 173.25.0.41
       default: null
     environment:
       - PUID=1000
@@ -34,9 +34,27 @@ services:
               count: 1
               capabilities:
                 - gpu
+  jellyseerr:
+    image: fallenbagel/jellyseerr:latest
+    container_name: jellyseerr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Madrid
+    volumes:
+      - ${STACKS_PATH}/arrs/jellyseerr:/app/config    
+    networks:
+      default: null
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.jellyseerr.entrypoints=websecure
+      - traefik.http.routers.jellyseerr.rule=Host(`js.esh.racer.red`)
+      - traefik.http.routers.jellyseerr.tls=true
+      - traefik.http.services.jellyseerr.loadbalancer.server.port=5055
 networks:
-  arrs_default:
-    external: true
+  # arrs_default:
+  #   external: true
   default:
     name: proxy
     external: true
