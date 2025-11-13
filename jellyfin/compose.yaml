@@ -12,7 +12,7 @@ services:
       - PGID=1000
       - TZ=Europe/Madrid
     volumes:
-      - ${STACKS_PATH}/jelly:/config
+      - ${STACKS_PATH}/jelly/jellyfin:/config
       - ${MEDIA_PATH}/tvshows:/data/tvshows
       - ${MEDIA_PATH}/movies:/data/movies
     ports:
@@ -42,7 +42,7 @@ services:
       - PGID=1000
       - TZ=Europe/Madrid
     volumes:
-      - ${STACKS_PATH}/jellyseerr:/app/config    
+      - ${STACKS_PATH}/jelly/jellyseerr:/app/config    
     networks:
       default: null
     restart: unless-stopped
