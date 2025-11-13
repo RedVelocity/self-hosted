@@ -23,7 +23,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.jellyfin.entrypoints=websecure
-      - traefik.http.routers.jellyfin.rule=Host(`jelly.esh.racer.red`)
+      - traefik.http.routers.jellyfin.rule=Host(`jelly.${JELLY_HOST}`)
       - traefik.http.routers.jellyfin.tls=true
       - traefik.http.services.jellyfin.loadbalancer.server.port=8096
     deploy:
@@ -49,7 +49,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.jellyseerr.entrypoints=websecure
-      - traefik.http.routers.jellyseerr.rule=Host(`js.esh.racer.red`)
+      - traefik.http.routers.jellyseerr.rule=Host(`js.${JELLY_HOST}`)
       - traefik.http.routers.jellyseerr.tls=true
       - traefik.http.services.jellyseerr.loadbalancer.server.port=5055
 networks:
