@@ -9,7 +9,7 @@ services:
       - ${STACKS_PATH}/backrest/cache:/cache
       - ${STACKS_PATH}/backrest/tmp:/tmp
       - ${STACKS_PATH}/backrest/rclone:/root/.config/rclone # Mount for rclone config (needed when using rclone remotes)
-      - ${STACKS_PATH}:/userdata  # Mount local paths to backup
+      - ${STACKS_PATH}:/userdata:ro  # Mount local paths to backup
     environment:
       - BACKREST_DATA=/data
       - BACKREST_CONFIG=/config/config.json
