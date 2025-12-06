@@ -18,6 +18,8 @@ services:
       - TZ=Europe/Madrid
     ports:
       - 9898:9898
+      # Rclone
+      - 53682:53682
     restart: unless-stopped
     labels:
       - traefik.enable=true
