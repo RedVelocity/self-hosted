@@ -1,29 +1,25 @@
 services:
-  backrest:
-    image: garethgeorge/backrest:latest
-    container_name: backrest
-    hostname: backrest
-    volumes:
-      - ${STACKS_PATH}/backrest/data:/data
-      - ${STACKS_PATH}/backrest/config:/config
-      - ${STACKS_PATH}/backrest/cache:/cache
-      - ${STACKS_PATH}/backrest/tmp:/tmp
-      - ${STACKS_PATH}/backrest/rclone:/root/.config/rclone # Mount for rclone config (needed when using rclone remotes)
-      - ${STACKS_PATH}:/userdata  # Mount local paths to backup
-    environment:
-      - BACKREST_DATA=/data
-      - BACKREST_CONFIG=/config/config.json
-      - XDG_CACHE_HOME=/cache
-      - TMPDIR=/tmp
-      - TZ=America/Los_Angeles
-    ports:
-      - 9898:9898
+  homarr:
+    container_name: homarr
+    image: ghcr.io/homarr-labs/homarr:latest
     restart: unless-stopped
+    volumes:
+      #- /var/run/docker.sock:/var/run/docker.sock:ro
+      - ${STACKS_PATH}/homarr/appdata:/appdata
+    environment:
+      SECRET_ENCRYPTION_KEY: ${SECRET_ENCRYPTION_KEY}
+    ports:
+      - '7575:7575'
     labels:
       - traefik.enable=true
-      - traefik.http.routers.backrest.entrypoints=websecure
-      - traefik.http.routers.backrest.rule=Host(`${BACKREST_HOST}`)
-      - traefik.http.routers.backrest.tls=true
+      - traefik.http.routers.homarr.entrypoints=websecure
+      - traefik.http.routers.homarr.rule=Host(`${HOMARR_HOST}`)
+      - traefik.http.routers.homarr.tls=true
+      # Template labels for multi host/service Traefik deployment
+      # - traefik.http.routers.homarralt.entrypoints=websecure
+      # - traefik.http.routers.homarralt.rule=Host(`${HOMARR_HOST_ALT}`)
+      # - traefik.http.routers.homarralt.tls=true
+      # - traefik.http.routers.homarr.tls.certresolver=cloudflare
 networks:
   default:
     name: proxy
