@@ -12,6 +12,7 @@ services:
       - ${BACKUP_PATH}:/backups
       - ${RESTORE_PATH}:/restore
       - ${STACKS_PATH}:/userdata  # Mount local paths to backup
+      - /var/run/docker.sock:/var/run/docker.sock # For starting/stopping containers
     environment:
       - BACKREST_DATA=/data
       - BACKREST_CONFIG=/config/config.json
