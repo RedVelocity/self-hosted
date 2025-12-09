@@ -3,7 +3,7 @@ services:
     image: garethgeorge/backrest:latest
     container_name: backrest
     hostname: backrest
-    # command: rclone rcd --rc-web-gui --rc-web-gui-no-open-browser
+    command: rclone rcd --rc-web-gui --rc-web-gui-no-open-browser
     volumes:
       - ${STACKS_PATH}/backrest/data:/data
       - ${STACKS_PATH}/backrest/config:/config
