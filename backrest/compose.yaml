@@ -22,6 +22,7 @@ services:
       - TZ=Europe/Madrid
     ports:
       - 9898:9898
+      - 5572:5572
     restart: unless-stopped
     labels:
       - traefik.enable=true
