@@ -42,7 +42,7 @@ services:
     ports:
       - 5572:5572
     volumes:
-      - ${STACKS_PATH}/backrest/rclone:/config:ro
+      - ${STACKS_PATH}/backrest/rclone:/home/rclone/.config/rclone:ro
     labels:
       - traefik.enable=true
       - traefik.http.routers.rclone.entrypoints=websecure
