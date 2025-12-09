@@ -29,7 +29,7 @@ services:
       - traefik.http.routers.backrest.entrypoints=websecure
       - traefik.http.routers.backrest.rule=Host(`${BACKREST_HOST}`)
       - traefik.http.routers.backrest.tls=true
-      - traefik.http.routers.backrest.loadbalancer.server.port=9898
+      - traefik.http.services.backrest.loadbalancer.server.port=9898
       # - traefik.http.routers.rclone.entrypoints=websecure
       # - traefik.http.routers.rclone.rule=Host(`${RCLONE_HOST}`)
       # - traefik.http.routers.rclone.tls=true
