@@ -28,30 +28,6 @@ services:
       - traefik.http.routers.backrest.rule=Host(`${BACKREST_HOST}`)
       - traefik.http.routers.backrest.tls=true
 
-  rclone-gui:
-    image: decovar/rclone-rc-web-gui:latest
-    container_name: rclone-gui
-    restart: unless-stopped
-    environment:
-      - TZ=Europe/Madrid
-      - RCLONE_ALLOW_ORIGIN_SCHEME=http
-      - RCLONE_ALLOW_ORIGIN_HOST=backrest
-      - RCLONE_ALLOW_ORIGIN_PORT=5572
-      - RCLONE_USER=${RCLONE_USER}
-      - RCLONE_PASS=${RCLONE_PW}
-    ports:
-      - 5572:5572
-    volumes:
-      - ${STACKS_PATH}/backrest/rclone:/home/rclone/.config/rclone
-    labels:
-      - traefik.enable=true
-      - traefik.http.routers.rclone.entrypoints=websecure
-      - traefik.http.routers.rclone.rule=Host(`${RCLONE_HOST}`)
-      - traefik.http.routers.rclone.tls=true
-      - traefik.http.services.rclone.loadbalancer.server.port=5572
-    depends_on:
-      - backrest
-
 networks:
   default:
     external: true
