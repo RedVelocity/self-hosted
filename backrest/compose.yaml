@@ -31,6 +31,7 @@ services:
   rclone-gui:
     image: decovar/rclone-rc-web-gui:latest
     container_name: rclone-gui
+    user: root
     restart: unless-stopped
     environment:
       - TZ=Europe/Madrid
