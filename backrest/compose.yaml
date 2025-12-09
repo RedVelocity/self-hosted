@@ -28,6 +28,10 @@ services:
       - traefik.http.routers.backrest.entrypoints=websecure
       - traefik.http.routers.backrest.rule=Host(`${BACKREST_HOST}`)
       - traefik.http.routers.backrest.tls=true
+      - traefik.http.routers.rclone.entrypoints=websecure
+      - traefik.http.routers.rclone.rule=Host(`${RCLONE_HOST}`)
+      - traefik.http.routers.rclone.tls=true
+      - traefik.http.services.rclone.loadbalancer.server.port=5572
 
 networks:
   default:
