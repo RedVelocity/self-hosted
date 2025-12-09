@@ -3,7 +3,7 @@ services:
     image: garethgeorge/backrest:latest
     container_name: backrest
     hostname: backrest
-    command: rclone rcd --rc-web-gui --rc-web-gui-no-open-browser
+    # command: rclone rcd --rc-web-gui --rc-web-gui-no-open-browser
     volumes:
       - ${STACKS_PATH}/backrest/data:/data
       - ${STACKS_PATH}/backrest/config:/config
@@ -21,19 +21,19 @@ services:
       - TMPDIR=/tmp
       - TZ=Europe/Madrid
     ports:
-      - 9898:9898
-      - 5572:5572
+      - 9898:9898 # backrest
+      # - 5572:5572 # rclone
     restart: unless-stopped
     labels:
       - traefik.enable=true
       - traefik.http.routers.backrest.entrypoints=websecure
       - traefik.http.routers.backrest.rule=Host(`${BACKREST_HOST}`)
       - traefik.http.routers.backrest.tls=true
-      - traefik.http.services.backrest.loadbalancer.server.port=9898
-      - traefik.http.routers.rclone.entrypoints=websecure
-      - traefik.http.routers.rclone.rule=Host(`${RCLONE_HOST}`)
-      - traefik.http.routers.rclone.tls=true
-      - traefik.http.services.rclone.loadbalancer.server.port=5572
+      - traefik.http.routers.backrest.loadbalancer.server.port=9898
+      # - traefik.http.routers.rclone.entrypoints=websecure
+      # - traefik.http.routers.rclone.rule=Host(`${RCLONE_HOST}`)
+      # - traefik.http.routers.rclone.tls=true
+      # - traefik.http.services.rclone.loadbalancer.server.port=5572
 
 networks:
   default:
