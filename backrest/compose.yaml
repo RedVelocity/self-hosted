@@ -31,7 +31,6 @@ services:
   rclone-gui:
     image: decovar/rclone-rc-web-gui:latest
     container_name: rclone-gui
-    user: root
     restart: unless-stopped
     environment:
       - TZ=Europe/Madrid
@@ -43,7 +42,7 @@ services:
     ports:
       - 5572:5572
     volumes:
-      - ${STACKS_PATH}/backrest/rclone:/home/rclone/.config/rclone:ro
+      - ${STACKS_PATH}/backrest/rclone:/home/rclone/.config/rclone
     labels:
       - traefik.enable=true
       - traefik.http.routers.rclone.entrypoints=websecure
