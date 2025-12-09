@@ -31,8 +31,14 @@ services:
   rclone-gui:
     image: decovar/rclone-rc-web-gui:latest
     container_name: rclone-gui
-    hostname: rclone-gui
     restart: unless-stopped
+    environment:
+      - TZ=Europe/Madrid
+      - RCLONE_ALLOW_ORIGIN_SCHEME=http
+      - RCLONE_ALLOW_ORIGIN_HOST=127.0.0.1
+      - RCLONE_ALLOW_ORIGIN_PORT=5572
+      - RCLONE_USER=${RCLONE_USER}
+      - RCLONE_PASS=${RCLONE_PW}
     ports:
       - 5572:5572
     volumes:
