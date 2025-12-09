@@ -22,7 +22,7 @@ services:
       - TZ=Europe/Madrid
     ports:
       - 9898:9898 # backrest
-      # - 5572:5572 # rclone
+      - 5572:5572 # rclone
     restart: unless-stopped
     labels:
       - traefik.enable=true
@@ -31,10 +31,11 @@ services:
       - traefik.http.routers.backrest.service=backrest
       - traefik.http.routers.backrest.tls=true
       - traefik.http.services.backrest.loadbalancer.server.port=9898
-      # - traefik.http.routers.rclone.entrypoints=websecure
-      # - traefik.http.routers.rclone.rule=Host(`${RCLONE_HOST}`)
-      # - traefik.http.routers.rclone.tls=true
-      # - traefik.http.services.rclone.loadbalancer.server.port=5572
+      - traefik.http.routers.rclone.entrypoints=websecure
+      - traefik.http.routers.rclone.rule=Host(`${RCLONE_HOST}`)
+      - traefik.http.routers.rclone.service=rclone
+      - traefik.http.routers.rclone.tls=true
+      - traefik.http.services.rclone.loadbalancer.server.port=5572
 
 networks:
   default:
