@@ -3,17 +3,16 @@ services:
     image: garethgeorge/backrest:latest
     container_name: backrest
     hostname: backrest
-    command: rcd --rc-web-gui --rc-addr :5572
     volumes:
       - ${STACKS_PATH}/backrest/data:/data
       - ${STACKS_PATH}/backrest/config:/config
       - ${STACKS_PATH}/backrest/cache:/cache
       - ${STACKS_PATH}/backrest/tmp:/tmp
-      - ${STACKS_PATH}/backrest/rclone:/root/.config/rclone # Mount for rclone config (needed when using rclone remotes)
+      - ${STACKS_PATH}/backrest/rclone:/root/.config/rclone  # Shared rclone config
       - ${BACKUP_PATH}:/backups
       - ${RESTORE_PATH}:/restore
-      - ${STACKS_PATH}:/userdata  # Mount local paths to backup
-      - /var/run/docker.sock:/var/run/docker.sock:ro # For starting/stopping containers
+      - ${STACKS_PATH}:/userdata
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     environment:
       - BACKREST_DATA=/data
       - BACKREST_CONFIG=/config/config.json
@@ -28,11 +27,26 @@ services:
       - traefik.http.routers.backrest.entrypoints=websecure
       - traefik.http.routers.backrest.rule=Host(`${BACKREST_HOST}`)
       - traefik.http.routers.backrest.tls=true
+
+  rclone-gui:
+    image: decovar/rclone-rc-web-gui:latest
+    container_name: rclone-gui
+    hostname: rclone-gui
+    restart: unless-stopped
+    ports:
+      - 5572:5572
+    volumes:
+      - ${STACKS_PATH}/backrest/rclone:/config:ro
+    labels:
+      - traefik.enable=true
       - traefik.http.routers.rclone.entrypoints=websecure
       - traefik.http.routers.rclone.rule=Host(`${RCLONE_HOST}`)
       - traefik.http.routers.rclone.tls=true
       - traefik.http.services.rclone.loadbalancer.server.port=5572
+    depends_on:
+      - backrest
+
 networks:
   default:
-    name: proxy
     external: true
+    name: proxy
