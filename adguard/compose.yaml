@@ -20,7 +20,7 @@ services:
       - traefik.http.routers.adguard.entrypoints=websecure
       - traefik.http.routers.adguard.rule=Host(`${AG_HOST}`)
       - traefik.http.routers.adguard.tls=true
-      - traefik.http.services.adguard.loadbalancer.server.port=5002
+      
 networks:
   default:
     name: proxy
