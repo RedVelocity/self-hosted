@@ -3,6 +3,7 @@ services:
     image: garethgeorge/backrest:latest
     container_name: backrest
     hostname: backrest
+    command: rcd --rc-web-gui --rc-addr :5572
     volumes:
       - ${STACKS_PATH}/backrest/data:/data
       - ${STACKS_PATH}/backrest/config:/config
@@ -27,6 +28,10 @@ services:
       - traefik.http.routers.backrest.entrypoints=websecure
       - traefik.http.routers.backrest.rule=Host(`${BACKREST_HOST}`)
       - traefik.http.routers.backrest.tls=true
+      - traefik.http.routers.rclone.entrypoints=websecure
+      - traefik.http.routers.rclone.rule=Host(`${RCLONE_HOST}`)
+      - traefik.http.routers.rclone.tls=true
+      - traefik.http.services.rclone.loadbalancer.server.port=5572
 networks:
   default:
     name: proxy
