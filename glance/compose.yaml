@@ -17,6 +17,8 @@ services:
       - traefik.http.routers.glance.entrypoints=websecure
       - traefik.http.routers.glance.rule=Host(`${GLANCE_HOST}`)
       - traefik.http.routers.glance.tls=true
+
 networks:
   default:
     name: proxy
+    external: true
