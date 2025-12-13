@@ -1,16 +1,22 @@
-## Add your compose file here
 services:
-  hello_world:
-    image: hello-world
-    # networks:
-    #   - default
-    # ports:
-    #   - 3000:3000
-    # volumes:
-    #   - data:/data
-
-# networks:
-#   default: {}
-
-# volumes:
-#   data:
+  homarr:
+    container_name: glance
+    image: glanceapp/glance:latest
+    restart: unless-stopped
+    volumes:
+      - ${STACKS_PATH}/glance/config:/app/config
+      - ${STACKS_PATH}/glance/assets:/app/assets
+      # Optionally, also mount docker socket if you want to use the docker containers widget
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - TZ=Europe/Madrid
+    ports:
+      - '8090:8080'
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.glance.entrypoints=websecure
+      - traefik.http.routers.glance.rule=Host(`${GLANCE_HOST}`)
+      - traefik.http.routers.glance.tls=true
+networks:
+  default:
+    name: proxy
