@@ -1,5 +1,5 @@
 services:
-  homarr:
+  glance:
     container_name: glance
     image: glanceapp/glance:latest
     restart: unless-stopped
