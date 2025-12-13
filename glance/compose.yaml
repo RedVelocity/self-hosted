@@ -4,7 +4,7 @@ services:
     image: glanceapp/glance:latest
     restart: unless-stopped
     volumes:
-      - ${STACKS_PATH}/glance/.env:/app.env
+      - ${STACKS_PATH}/glance/.env:/app/.env
       - ${STACKS_PATH}/glance/config:/app/config
       - ${STACKS_PATH}/glance/assets:/app/assets
       # Optionally, also mount docker socket if you want to use the docker containers widget
