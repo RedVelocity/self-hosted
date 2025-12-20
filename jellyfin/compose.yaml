@@ -37,6 +37,8 @@ services:
   jellyseerr:
     image: fallenbagel/jellyseerr:latest
     container_name: jellyseerr
+    ports:
+      - 5055:5055
     environment:
       - PUID=1000
       - PGID=1000
