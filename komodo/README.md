@@ -142,6 +142,7 @@ KOMODO_HETZNER_TOKEN= # Alt: KOMODO_HETZNER_TOKEN_FILE
 PERIPHERY_PASSKEYS=${KOMODO_PASSKEY}
 ## Specify the root directory used by Periphery agent.
 PERIPHERY_ROOT_DIRECTORY=${STACKS_PATH}/komodo/periphery
+PERIPHERY_STACKS_DIRECTORY=${STACKS_PATH}
 
 ## Enable SSL using self signed certificates.
 ## Connect to Periphery at https://address:8120.
