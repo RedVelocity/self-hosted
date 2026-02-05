@@ -8,8 +8,8 @@ services:
       - ${STACKS_PATH}/glance/assets:/app/assets
       # Optionally, also mount docker socket if you want to use the docker containers widget
       # - /var/run/docker.sock:/var/run/docker.sock:ro
-    # env_file:
-    #   - .env
+    env_file:
+      - .env
     environment:
       - TZ=Europe/Madrid
     ports:
