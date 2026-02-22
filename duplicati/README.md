@@ -1,3 +1,7 @@
+### ⚠️⚠️⚠️ I have switched to **[Backrest](https://github.com/RedVelocity/self-hosted/tree/main/backrest)**
+
+---
+
 # 🧾 Duplicati Backup Stack
 
 This stack deploys **[Duplicati](https://www.duplicati.com/)** using the **LinuxServer.io** image, with integrated Docker access via the `universal-docker` mod.  
