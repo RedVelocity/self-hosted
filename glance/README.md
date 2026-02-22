@@ -1,1 +1,1 @@
-### Full setup [here](https://github.com/RedVelocity/glance-config)
+### ⚠️⚠️ Full setup [here](https://github.com/RedVelocity/glance-config)
