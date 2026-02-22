@@ -3,11 +3,12 @@
 This stack includes:
 
 - **Gluetun** (VPN container)
-- **qBittorrent**
-- **Prowlarr**
-- **Sonarr**
-- **Radarr**
-- **Jellyseerr**
+- **qBittorrent** (Downloader)
+- **Prowlarr** (Indexer)
+- **Sonarr** (TV)
+- **Radarr** (Movies)
+- **Flaresolverr** (Proxy for Prowlarr indexers)
+- ~~**Jellyseerr**~~
 
 All `arrs` services route through the **Gluetun** VPN container for privacy.  
 Optional **Traefik** labels are included for reverse proxy setups.
