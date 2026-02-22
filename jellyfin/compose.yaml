@@ -35,7 +35,7 @@ services:
               capabilities:
                 - gpu
   seerr:
-    image: ghcr.io/seerr-team/seerr:3
+    image: ghcr.io/seerr-team/seerr:3.0
     container_name: seerr
     init: true
     ports:
