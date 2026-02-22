@@ -35,7 +35,7 @@ services:
               capabilities:
                 - gpu
   seerr:
-    image: ghcr.io/seerr-team/seerr:latest
+    image: ghcr.io/seerr-team/seerr:3
     container_name: seerr
     init: true
     ports:
@@ -52,7 +52,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.seerr.entrypoints=websecure
-      - traefik.http.routers.seerr.rule=Host(`js.${JELLY_HOST}`)
+      - traefik.http.routers.seerr.rule=Host(`seerr.${JELLY_HOST}`)
       - traefik.http.routers.seerr.tls=true
       - traefik.http.services.seerr.loadbalancer.server.port=5055
 networks:
