@@ -11,6 +11,8 @@ services:
     env_file:
       # komodo path
       - /etc/komodo/stacks/glance/.env
+      # non komodo path
+      # - .env
     environment:
       - TZ=${TZ}
     ports:
