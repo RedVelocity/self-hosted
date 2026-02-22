@@ -34,9 +34,10 @@ services:
               count: 1
               capabilities:
                 - gpu
-  jellyseerr:
-    image: fallenbagel/jellyseerr:latest
-    container_name: jellyseerr
+  seerr:
+    image: ghcr.io/seerr-team/seerr:latest
+    container_name: seerr
+    init: true
     ports:
       - 5055:5055
     environment:
@@ -44,16 +45,16 @@ services:
       - PGID=1000
       - TZ=Europe/Madrid
     volumes:
-      - ${STACKS_PATH}/jelly/jellyseerr:/app/config    
+      - ${STACKS_PATH}/jelly/seerr:/app/config    
     networks:
       default: null
     restart: unless-stopped
     labels:
       - traefik.enable=true
-      - traefik.http.routers.jellyseerr.entrypoints=websecure
-      - traefik.http.routers.jellyseerr.rule=Host(`js.${JELLY_HOST}`)
-      - traefik.http.routers.jellyseerr.tls=true
-      - traefik.http.services.jellyseerr.loadbalancer.server.port=5055
+      - traefik.http.routers.seerr.entrypoints=websecure
+      - traefik.http.routers.seerr.rule=Host(`js.${JELLY_HOST}`)
+      - traefik.http.routers.seerr.tls=true
+      - traefik.http.services.seerr.loadbalancer.server.port=5055
 networks:
   # arrs_default:
   #   external: true
