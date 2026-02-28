@@ -76,4 +76,4 @@ This means the subnet you tried to create overlaps with an existing Docker netwo
 
 - If Traefik manages TLS, ensure it has access to ACME/DNS challenge credentials (e.g., Cloudflare API token) if using DNS-based challenge.
 
-⚠️ **FULL DISCLAIMER:** This README is generated with the help of AI/GPT but the config is all mine.
+⚠️ **FULL DISCLOSURE:** This README is generated with the help of AI/GPT but the config is all mine.
