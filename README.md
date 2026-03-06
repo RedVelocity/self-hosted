@@ -1,4 +1,4 @@
-# 🏠 RedVelocity Self-Hosted Stack
+# 🏠 [RedVelocity](https://redvelo.city) Self-Hosted Stack
 
 A collection of Docker Compose stacks for a complete **self-hosted home server** environment — including networking setup, reverse proxy (Traefik), ad blocking (AdGuard Home), media management (Arrs & Jellyfin), and more.
 
