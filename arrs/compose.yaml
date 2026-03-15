@@ -8,7 +8,6 @@ services:
       - NET_ADMIN
     volumes:
       - ${STACKS_PATH}/arrs/gluetun:/gluetun
-      - ${STACKS_PATH}/arrs/gluetun/config.toml:/gluetun/auth/config.toml
     environment:
       - VPN_SERVICE_PROVIDER=${VPN_SERVICE_PROVIDER}
       - OPENVPN_USER=${OPENVPN_USER}
