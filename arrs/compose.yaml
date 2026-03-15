@@ -24,6 +24,7 @@ services:
       - 7878:7878/tcp # radarr
       - 8989:8989/tcp # sonarr
       - 8191:8191/tcp # flaresolverr
+      - 8000:8000/tcp # gluetun control server
       # - 6767:6767/tcp # bazarr
     networks:
       - default
