@@ -88,7 +88,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Madrid
-      - DOCKER_MODS=ghcr.io/themepark-dev/theme.park:sonarr
+      - DOCKER_MODS=ghcr.io/themepark-dev/theme.park:prowlarr
       - TP_THEME=overseerr
     volumes:
       - ${STACKS_PATH}/arrs/prowlarr/Config:/config
@@ -130,7 +130,7 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Madrid
-      - DOCKER_MODS=ghcr.io/themepark-dev/theme.park:sonarr
+      - DOCKER_MODS=ghcr.io/themepark-dev/theme.park:radarr
       - TP_THEME=overseerr
     volumes:
       - ${STACKS_PATH}/arrs/radarr/Config:/config
