@@ -109,6 +109,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Madrid
+      - DOCKER_MODS=ghcr.io/themepark-dev/theme.park:sonarr
+      - TP_THEME=overseerr
     volumes:
       - ${STACKS_PATH}/arrs/sonarr/Config:/config
       - ${STACKS_PATH}/arrs/sonarr/Backup:/data/Backup
