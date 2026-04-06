@@ -92,6 +92,8 @@ services:
       - ${STACKS_PATH}/arrs/prowlarr/Config:/config
       - ${STACKS_PATH}/arrs/prowlarr/Backup:/data/Backup
       - ${DOWNLOADS_PATH}:/data/downloads
+      - DOCKER_MODS=ghcr.io/themepark-dev/theme.park:sonarr
+      - TP_THEME=overseerr
     restart: unless-stopped
     network_mode: service:gluetun
   flaresolverr:
@@ -133,6 +135,8 @@ services:
       - ${MOVIES_PATH}:/data/movies
       - ${DOWNLOADS_PATH}:/data/downloads
       - ${STACKS_PATH}/arrs/radarr/Backup:/data/Backup
+      - DOCKER_MODS=ghcr.io/themepark-dev/theme.park:sonarr
+      - TP_THEME=overseerr
     restart: unless-stopped
     network_mode: service:gluetun
     #depends_on:
