@@ -104,6 +104,8 @@ services:
     environment:
       - TZ=Europe/Madrid
       - HEADLESS=true
+    volumes:
+      - ${STACKS_PATH}/arrs/flaresolver/config:/config
     restart: unless-stopped
     network_mode: service:gluetun
   sonarr:
