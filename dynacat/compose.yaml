@@ -1,0 +1,30 @@
+services:
+  glance:
+    container_name: dynacat
+    image: panonim/dynacat:latest
+    restart: unless-stopped
+    volumes:
+      - ${STACKS_PATH}/dynacat/config:/app/config
+      - ${STACKS_PATH}/dynacat/assets:/app/assets
+      # Optionally, also mount docker socket if you want to use the docker containers widget
+      # - /var/run/docker.sock:/var/run/docker.sock:ro
+    env_file:
+      # komodo path
+      - /etc/komodo/stacks/dynacat/.env
+      # non komodo path
+      # - .env
+    environment:
+      - TZ=${TZ}
+      - ENABLE_DYNAMIC_UPDATE=true
+    ports:
+      - '8099:8080'
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.dynacat.entrypoints=websecure
+      - traefik.http.routers.dynacat.rule=Host(`dash.esh.redvelo.city`)
+      - traefik.http.routers.dynacat.tls=true
+
+networks:
+  default:
+    name: proxy
+    external: true
