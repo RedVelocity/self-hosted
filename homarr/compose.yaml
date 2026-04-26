@@ -1,25 +1,29 @@
 services:
-  homarr:
-    container_name: homarr
-    image: ghcr.io/homarr-labs/homarr:latest
+  glance:
+    container_name: dynacat
+    image: panonim/dynacat:latest
     restart: unless-stopped
     volumes:
-      #- /var/run/docker.sock:/var/run/docker.sock:ro
-      - ${STACKS_PATH}/homarr/appdata:/appdata
+      - ${STACKS_PATH}/dynacat/config:/app/config
+      - ${STACKS_PATH}/dynacat/assets:/app/assets
+      # Optionally, also mount docker socket if you want to use the docker containers widget
+      # - /var/run/docker.sock:/var/run/docker.sock:ro
+    env_file:
+      # komodo path
+      - /etc/komodo/stacks/dynacat/.env
+      # non komodo path
+      # - .env
     environment:
-      SECRET_ENCRYPTION_KEY: ${SECRET_ENCRYPTION_KEY}
+      - TZ=${TZ}
+      - ENABLE_DYNAMIC_UPDATE=true
     ports:
-      - '7575:7575'
+      - '8099:8080'
     labels:
       - traefik.enable=true
-      - traefik.http.routers.homarr.entrypoints=websecure
-      - traefik.http.routers.homarr.rule=Host(`${HOMARR_HOST}`)
-      - traefik.http.routers.homarr.tls=true
-      # Template labels for multi host/service Traefik deployment
-      # - traefik.http.routers.homarralt.entrypoints=websecure
-      # - traefik.http.routers.homarralt.rule=Host(`${HOMARR_HOST_ALT}`)
-      # - traefik.http.routers.homarralt.tls=true
-      # - traefik.http.routers.homarr.tls.certresolver=cloudflare
+      - traefik.http.routers.dynacat.entrypoints=websecure
+      - traefik.http.routers.dynacat.rule=Host(`dash.esh.redvelo.city`)
+      - traefik.http.routers.dynacat.tls=true
+
 networks:
   default:
     name: proxy
