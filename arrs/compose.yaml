@@ -58,7 +58,7 @@ services:
       # - traefik.http.services.bazarr.loadbalancer.server.port=6767
       # - traefik.http.routers.bazarr.tls=true
   qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:latest
+    image: lscr.io/linuxserver/qbittorrent:5
     container_name: qbittorrent
     environment:
       - PUID=1000
