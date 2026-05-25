@@ -69,7 +69,7 @@ services:
       # - DOCKER_MODS=ghcr.io/themepark-dev/theme.park:qbittorrent
       # - TP_THEME=overseerr
     volumes:
-      - ${STACKS_PATH}/arrs/qbit:/config
+      # - ${STACKS_PATH}/arrs/qbit:/config
       - ${DOWNLOADS_PATH}:/data/downloads
     restart: unless-stopped
     network_mode: service:gluetun
