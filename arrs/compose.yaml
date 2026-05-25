@@ -73,16 +73,16 @@ services:
       - ${DOWNLOADS_PATH}:/data/downloads
     restart: unless-stopped
     network_mode: service:gluetun
-    healthcheck:
-      test:
-        - CMD
-        - curl
-        - -f
-        - http://localhost:8080
-      interval: 30s # Check every 30 seconds
-      timeout: 30s # Timeout if the check takes more than 30 seconds
-      retries: 4 # Retry up to 5 times before marking the service unhealthy
-      start_period: 30s # Wait 30 seconds before starting the first health check
+    # healthcheck:
+    #   test:
+    #     - CMD
+    #     - curl
+    #     - -f
+    #     - http://localhost:8080
+    #   interval: 30s # Check every 30 seconds
+    #   timeout: 30s # Timeout if the check takes more than 30 seconds
+    #   retries: 4 # Retry up to 5 times before marking the service unhealthy
+    #   start_period: 30s # Wait 30 seconds before starting the first health check
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest # Change to "latest" for stable
     container_name: prowlarr
