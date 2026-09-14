@@ -1,6 +1,6 @@
 services:
   jellyfin:
-    image: lscr.io/linuxserver/jellyfin:${JELLY_VERSION:latest}
+    image: lscr.io/linuxserver/jellyfin:${JELLY_VERSION:-latest}
     container_name: jellyfin
     hostname: jellyfin
     networks:
