@@ -84,7 +84,7 @@ services:
       retries: 4 # Retry up to 5 times before marking the service unhealthy
       start_period: 30s # Wait 30 seconds before starting the first health check
   prowlarr:
-    image: lscr.io/linuxserver/prowlarr:latest # Change to "latest" for stable
+    image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
     environment:
       - PUID=1000
@@ -109,7 +109,7 @@ services:
     restart: unless-stopped
     network_mode: service:gluetun
   sonarr:
-    image: lscr.io/linuxserver/sonarr:latest # Change to "latest" for stable
+    image: lscr.io/linuxserver/sonarr:latest
     container_name: sonarr
     environment:
       - PUID=1000
