@@ -1,0 +1,134 @@
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  nextjs-app:
+    image: ghcr.io/fredrikburmester/streamystats-nextjs:${VERSION:-latest}    
+    container_name: sst-ui
+    ports:
+      - "3030:3000"
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@sst-db:5432/${POSTGRES_DB:-streamystats}
+      - JOB_SERVER_URL=http://sst-js:3005
+      - HOSTNAME=0.0.0.0
+      - SESSION_SECRET=${SESSION_SECRET}
+      - INTERNAL_API_KEY=${INTERNAL_API_KEY:-${SESSION_SECRET}}
+      # Stable encryption key for server action closures (prevents session breakage on redeploy)
+      - NEXT_SERVER_ACTIONS_ENCRYPTION_KEY=${NEXT_SERVER_ACTIONS_ENCRYPTION_KEY}
+    depends_on:
+      vectorchord:
+        condition: service_healthy
+      job-server:
+        condition: service_healthy
+    restart: unless-stopped
+    logging: *default-logging
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.sst.entrypoints=websecure
+      - traefik.http.routers.sst.rule=Host(`sst.${HOST}`)
+      - traefik.http.routers.sst.service=sst
+      - traefik.http.routers.sst.tls=true
+      - traefik.http.services.sst.loadbalancer.server.port=3000
+    networks:
+      - default
+      - proxy
+
+  job-server:
+    image: ghcr.io/fredrikburmester/streamystats-job-server:${VERSION:-latest}
+    container_name: sst-js
+    environment:
+      - NODE_ENV=production
+      - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@sst-db:5432/${POSTGRES_DB:-streamystats}
+      - PORT=3005
+      - HOST=0.0.0.0
+      - NEXTJS_URL=http://sst-ui:3000
+      - INTERNAL_API_KEY=${INTERNAL_API_KEY:-${SESSION_SECRET}}
+      # Session polling interval in milliseconds (default: 5000)
+      - SESSION_POLL_INTERVAL_MS=${SESSION_POLL_INTERVAL_MS:-5000}
+      # Cron schedules (standard cron syntax)
+      - CRON_ACTIVITY_SYNC=${CRON_ACTIVITY_SYNC:-*/1 * * * *}
+      - CRON_RECENT_ITEMS_SYNC=${CRON_RECENT_ITEMS_SYNC:-*/1 * * * *}
+      - CRON_USER_SYNC=${CRON_USER_SYNC:-*/1 * * * *}
+      - CRON_PEOPLE_SYNC=${CRON_PEOPLE_SYNC:-*/15 * * * *}
+      - CRON_EMBEDDINGS_SYNC=${CRON_EMBEDDINGS_SYNC:-*/15 * * * *}
+      - CRON_GEOLOCATION_SYNC=${CRON_GEOLOCATION_SYNC:-*/5 * * * *}
+      - CRON_FINGERPRINT_SYNC=${CRON_FINGERPRINT_SYNC:-0 4 * * *}
+      - CRON_JOB_CLEANUP=${CRON_JOB_CLEANUP:-*/1 * * * *}
+      - CRON_OLD_JOB_CLEANUP=${CRON_OLD_JOB_CLEANUP:-0 3 * * *}
+      - CRON_FULL_SYNC=${CRON_FULL_SYNC:-0 2 * * *}
+      - CRON_DELETED_ITEMS_CLEANUP=${CRON_DELETED_ITEMS_CLEANUP:-0 * * * *}
+      # Skip full sync on server startup (set to "true" or "1" to skip)
+      - SKIP_STARTUP_FULL_SYNC=${SKIP_STARTUP_FULL_SYNC:-false}
+    depends_on:
+      vectorchord:
+        condition: service_healthy
+    restart: unless-stopped
+    logging: *default-logging
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+    networks:
+      - default
+
+  vectorchord:
+    image: tensorchord/vchord-postgres:pg17-v1.1.1
+    container_name: sst-db
+    command:
+      [
+        "postgres",
+        "-c",
+        "log_checkpoints=off",
+        "-c",
+        "shared_buffers=512MB",
+        "-c",
+        "work_mem=16MB",
+        "-c",
+        "maintenance_work_mem=256MB",
+        "-c",
+        "effective_cache_size=1536MB",
+        "-c",
+        "random_page_cost=1.1",
+        "-c",
+        "effective_io_concurrency=200",
+      ]
+    stop_signal: SIGINT
+    shm_size: 1g
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+      - POSTGRES_DB=${POSTGRES_DB:-streamystats}
+      - POSTGRES_HOST_AUTH_METHOD=scram-sha-256
+      - POSTGRES_INITDB_ARGS=--auth-host=scram-sha-256
+    volumes:
+      - vectorchord_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    logging: *default-logging
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-streamystats}",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    networks:
+      - default
+
+volumes:
+  vectorchord_data:
+
+networks:
+  proxy:
+    external: true
+  default:
