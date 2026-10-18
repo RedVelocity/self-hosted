@@ -1,0 +1,22 @@
+services:
+  prismarr:
+    image: shoshuo/prismarr:latest
+    container_name: prismarr
+    restart: unless-stopped
+    stop_grace_period: 30s
+    ports:
+      - "7070:7070"
+    volumes:
+      - ${STACKS_PATH}/prismarr/data:/var/www/html/var/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.prismarr.entrypoints=websecure
+      - traefik.http.routers.prismarr.rule=Host(`${PRISMARR_HOST}`)
+      - traefik.http.routers.prismarr.service=backrest
+      - traefik.http.routers.prismarr.tls=true
+      - traefik.http.services.backrest.loadbalancer.server.port=7070
+      
+networks:
+  default:
+    external: true
+    name: proxy
