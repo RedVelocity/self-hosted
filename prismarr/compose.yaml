@@ -12,9 +12,9 @@ services:
       - traefik.enable=true
       - traefik.http.routers.prismarr.entrypoints=websecure
       - traefik.http.routers.prismarr.rule=Host(`${PRISMARR_HOST}`)
-      - traefik.http.routers.prismarr.service=backrest
+      - traefik.http.routers.prismarr.service=prismarr
       - traefik.http.routers.prismarr.tls=true
-      - traefik.http.services.backrest.loadbalancer.server.port=7070
+      - traefik.http.services.prismarr.loadbalancer.server.port=7070
       
 networks:
   default:
