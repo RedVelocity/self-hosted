@@ -9,10 +9,7 @@ services:
       # Optionally, also mount docker socket if you want to use the docker containers widget
       # - /var/run/docker.sock:/var/run/docker.sock:ro
     env_file:
-      # komodo path
-      - /etc/komodo/stacks/dynacat/.env
-      # non komodo path
-      # - ${STACKS_PATH}/dynacat/.env
+      - /stacks/dynacat/.env
     environment:
       - TZ=${TZ}
       - ENABLE_DYNAMIC_UPDATE=true
