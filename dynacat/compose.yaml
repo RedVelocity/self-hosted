@@ -20,6 +20,7 @@ services:
       - traefik.http.routers.dynacat.entrypoints=websecure
       - traefik.http.routers.dynacat.rule=Host(`dash.esh.redvelo.city`)
       - traefik.http.routers.dynacat.tls=true
+      - dockhand.skip.cooldown=true
 
 networks:
   default:

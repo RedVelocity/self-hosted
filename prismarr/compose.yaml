@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     stop_grace_period: 30s
     ports:
-      - "7070:7070"
+      - '7070:7070'
     volumes:
       - ${STACKS_PATH}/prismarr/data:/var/www/html/var/data
     labels:
@@ -15,7 +15,8 @@ services:
       - traefik.http.routers.prismarr.service=prismarr
       - traefik.http.routers.prismarr.tls=true
       - traefik.http.services.prismarr.loadbalancer.server.port=7070
-      
+      - dockhand.skip.cooldown=true
+
 networks:
   default:
     external: true
