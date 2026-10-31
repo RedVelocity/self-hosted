@@ -9,11 +9,12 @@ services:
       - ${STACKS_PATH}/backrest/config:/config
       - ${STACKS_PATH}/backrest/cache:/cache
       - ${STACKS_PATH}/backrest/tmp:/tmp
-      - ${STACKS_PATH}/backrest/rclone:/root/.config/rclone  # Shared rclone config
+      - ${STACKS_PATH}/backrest/rclone:/root/.config/rclone # Shared rclone config
       - ${BACKUP_PATH}:/backups
       - ${RESTORE_PATH}:/restore
       - ${STACKS_PATH}:/userdata
       - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/lib/docker/volumes:/docker-volumes:ro # Named docker volumes
     environment:
       - BACKREST_DATA=/data
       - BACKREST_CONFIG=/config/config.json
