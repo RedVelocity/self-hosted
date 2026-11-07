@@ -37,6 +37,13 @@ services:
       - traefik.http.routers.qb.service=qb
       - traefik.http.services.qb.loadbalancer.server.port=8080
       - traefik.http.routers.qb.tls=true
+      # NEW: Tell Traefik to pass qBittorrent traffic through a body-rewrite middleware
+      - traefik.http.routers.qb.middlewares=qb-theme
+      # NEW: Define the middleware to inject the Overseerr theme.park CSS before the </body> tag
+      - traefik.experimental.plugins.plugin-rewrite-body.moduletype=://github.com
+      - traefik.http.middlewares.qb-theme.plugin.plugin-rewrite-body.rewrites.regex=</body>
+      - traefik.http.middlewares.qb-theme.plugin.plugin-rewrite-body.rewrites.replacement=<link rel="stylesheet" type="text/css" href="https://theme-park.dev/css/base/qbittorrent/overseerr.css"></body>
+      # resto
       - traefik.http.routers.prowlarr.entrypoints=websecure
       - traefik.http.routers.prowlarr.rule=Host(`prowl.${ARRS_HOST}`)
       - traefik.http.routers.prowlarr.service=prowlarr
@@ -66,11 +73,12 @@ services:
       - TZ=Europe/Madrid
       - WEBUI_PORT=8080
       # - DOCKER_MODS=ghcr.io/vuetorrent/vuetorrent-lsio-mod
-      - DOCKER_MODS=ghcr.io/themepark-dev/theme.park:qbittorrent
+      # - DOCKER_MODS=ghcr.io/themepark-dev/theme.park:qbittorrent
       - QBITTORRENT_VERSION=${QBITTORRENT_VERSION}
-      - TP_THEME=overseerr
+      # - TP_THEME=overseerr
     volumes:
       - ${STACKS_PATH}/arrs/qbit:/config
+      - ${STACKS_PATH}/arrs/qbit/modcache:/modcache
       - ${DOWNLOADS_PATH}:/data/downloads
     restart: unless-stopped
     network_mode: service:gluetun
