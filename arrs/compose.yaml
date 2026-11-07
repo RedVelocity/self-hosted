@@ -19,7 +19,7 @@ services:
       - 8888:8888/tcp # HTTP proxy
       - 8388:8388/tcp # Shadowsocks
       - 8388:8388/udp # Shadowsocks
-      - 8080:8080/tcp # qb      
+      - 8080:8080/tcp # qb
       - 9696:9696/tcp # prowlarr
       - 7878:7878/tcp # radarr
       - 8989:8989/tcp # sonarr
@@ -75,15 +75,11 @@ services:
     restart: unless-stopped
     network_mode: service:gluetun
     healthcheck:
-      test:
-        - CMD
-        - curl
-        - -f
-        - http://localhost:8080
-      interval: 30s # Check every 30 seconds
-      timeout: 30s # Timeout if the check takes more than 30 seconds
-      retries: 4 # Retry up to 5 times before marking the service unhealthy
-      start_period: 30s # Wait 30 seconds before starting the first health check
+      test: ['CMD', 'nc', '-z', '127.0.0.1', '8080']
+      interval: 30s # Checked every minute instead of 30 seconds to reduce idle load
+      timeout: 30s # Give it up to 10 seconds to respond
+      retries: 4 # Allows plenty of time for long torrent re-checks on startup
+      start_period: 1m # Docker ignores failures completely during the first 2 minutes of startup
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
     container_name: prowlarr
