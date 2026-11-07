@@ -38,11 +38,9 @@ services:
       - traefik.http.services.qb.loadbalancer.server.port=8080
       - traefik.http.routers.qb.tls=true
       # NEW: Tell Traefik to pass qBittorrent traffic through a body-rewrite middleware
-      - traefik.http.routers.qb.middlewares=qb-theme
-      # NEW: Define the middleware to inject the Overseerr theme.park CSS before the </body> tag
-      - traefik.experimental.plugins.plugin-rewrite-body.moduletype=://github.com
-      - traefik.http.middlewares.qb-theme.plugin.plugin-rewrite-body.rewrites.regex=</body>
-      - traefik.http.middlewares.qb-theme.plugin.plugin-rewrite-body.rewrites.replacement=<link rel="stylesheet" type="text/css" href="https://theme-park.dev/css/base/qbittorrent/overseerr.css"></body>
+      - 'traefik.http.routers.qbittorrent.middlewares=qbit-theme'
+      - 'traefik.http.middlewares.qbit-theme.plugin.rewrite-body.rewrites[0].regex=</head>'
+      - 'traefik.http.middlewares.qbit-theme.plugin.rewrite-body.rewrites[0].replacement=<link rel="stylesheet" type="text/css" href="https://theme-park.dev/css/base/qbittorrent/overseerr.css"></head>'
       # resto
       - traefik.http.routers.prowlarr.entrypoints=websecure
       - traefik.http.routers.prowlarr.rule=Host(`prowl.${ARRS_HOST}`)
