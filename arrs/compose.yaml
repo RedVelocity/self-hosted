@@ -32,6 +32,10 @@ services:
     restart: unless-stopped
     labels:
       - traefik.enable=true
+      # NEW: Tell Traefik to pass qBittorrent traffic through a body-rewrite middleware
+      - 'traefik.http.routers.qb.middlewares=qbit-theme'
+      - 'traefik.http.middlewares.qbit-theme.plugin.rewrite-body.rewrites[0].regex=</head>'
+      - 'traefik.http.middlewares.qbit-theme.plugin.rewrite-body.rewrites[0].replacement=<link rel="stylesheet" type="text/css" href="https://theme-park.dev/css/base/qbittorrent/overseerr.css"></head>'
       - traefik.http.routers.qb.entrypoints=websecure
       - traefik.http.routers.qb.rule=Host(`qb.${ARRS_HOST}`)
       - traefik.http.routers.qb.service=qb
