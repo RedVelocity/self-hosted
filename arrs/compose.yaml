@@ -32,30 +32,47 @@ services:
     restart: unless-stopped
     labels:
       - traefik.enable=true
-      # NEW: Tell Traefik to pass qBittorrent traffic through a body-rewrite middleware
-      - 'traefik.http.routers.qb.middlewares=qbit-theme'
+      # qbittorrent theme
       - 'traefik.http.middlewares.qbit-theme.plugin.rewrite-body.rewrites[0].regex=</head>'
       - 'traefik.http.middlewares.qbit-theme.plugin.rewrite-body.rewrites[0].replacement=<link rel="stylesheet" type="text/css" href="https://theme-park.dev/css/base/qbittorrent/overseerr.css"></head>'
+      - 'traefik.http.routers.qb.middlewares=qbit-theme'
+      # prowlarr theme
+      - 'traefik.http.middlewares.prowlarr-theme.plugin.rewrite-body.rewrites[0].regex=</head>'
+      - 'traefik.http.middlewares.prowlarr-theme.plugin.rewrite-body.rewrites[0].replacement=<link rel="stylesheet" type="text/css" href="https://theme-park.dev/css/base/prowlarr/overseerr.css"></head>'
+      - 'traefik.http.routers.prowlarr.middlewares=prowlarr-theme'
+      # radarr theme
+      - 'traefik.http.middlewares.radarr-theme.plugin.rewrite-body.rewrites[0].regex=</head>'
+      - 'traefik.http.middlewares.radarr-theme.plugin.rewrite-body.rewrites[0].replacement=<link rel="stylesheet" type="text/css" href="https://theme-park.dev/css/base/radarr/overseerr.css"></head>'
+      - 'traefik.http.routers.radarr.middlewares=radarr-theme'
+      # sonarr theme
+      - 'traefik.http.middlewares.sonarr-theme.plugin.rewrite-body.rewrites[0].regex=</head>'
+      - 'traefik.http.middlewares.sonarr-theme.plugin.rewrite-body.rewrites[0].replacement=<link rel="stylesheet" type="text/css" href="https://theme-park.dev/css/base/sonarr/overseerr.css"></head>'
+      - 'traefik.http.routers.sonarr.middlewares=sonarr-theme'
+      # qbittorrent
       - traefik.http.routers.qb.entrypoints=websecure
       - traefik.http.routers.qb.rule=Host(`qb.${ARRS_HOST}`)
       - traefik.http.routers.qb.service=qb
       - traefik.http.services.qb.loadbalancer.server.port=8080
       - traefik.http.routers.qb.tls=true
+      # prowlarr
       - traefik.http.routers.prowlarr.entrypoints=websecure
       - traefik.http.routers.prowlarr.rule=Host(`prowl.${ARRS_HOST}`)
       - traefik.http.routers.prowlarr.service=prowlarr
       - traefik.http.services.prowlarr.loadbalancer.server.port=9696
       - traefik.http.routers.prowlarr.tls=true
+      # radarr
       - traefik.http.routers.radarr.entrypoints=websecure
       - traefik.http.routers.radarr.rule=Host(`rad.${ARRS_HOST}`)
       - traefik.http.routers.radarr.service=radarr
       - traefik.http.services.radarr.loadbalancer.server.port=7878
       - traefik.http.routers.radarr.tls=true
+      # sonarr
       - traefik.http.routers.sonarr.entrypoints=websecure
       - traefik.http.routers.sonarr.rule=Host(`son.${ARRS_HOST}`)
       - traefik.http.routers.sonarr.service=sonarr
       - traefik.http.services.sonarr.loadbalancer.server.port=8989
       - traefik.http.routers.sonarr.tls=true
+      # gluetun control server
       - traefik.http.routers.gluetun.entrypoints=websecure
       - traefik.http.routers.gluetun.rule=Host(`gt.${ARRS_HOST}`)
       - traefik.http.routers.gluetun.service=gluetun
@@ -92,8 +109,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Madrid
-      - DOCKER_MODS=ghcr.io/themepark-dev/theme.park:prowlarr
-      - TP_THEME=overseerr
+      # - DOCKER_MODS=ghcr.io/themepark-dev/theme.park:prowlarr
+      # - TP_THEME=overseerr
     volumes:
       - ${STACKS_PATH}/arrs/prowlarr/Config:/config
       - ${STACKS_PATH}/arrs/prowlarr/Backup:/data/Backup
@@ -117,8 +134,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Madrid
-      - DOCKER_MODS=ghcr.io/themepark-dev/theme.park:sonarr
-      - TP_THEME=overseerr
+      # - DOCKER_MODS=ghcr.io/themepark-dev/theme.park:sonarr
+      # - TP_THEME=overseerr
     volumes:
       - ${STACKS_PATH}/arrs/sonarr/Config:/config
       - ${STACKS_PATH}/arrs/sonarr/Backup:/data/Backup
@@ -136,8 +153,8 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=Europe/Madrid
-      - DOCKER_MODS=ghcr.io/themepark-dev/theme.park:radarr
-      - TP_THEME=overseerr
+      # - DOCKER_MODS=ghcr.io/themepark-dev/theme.park:radarr
+      # - TP_THEME=overseerr
     volumes:
       - ${STACKS_PATH}/arrs/radarr/Config:/config
       - ${MOVIES_PATH}:/data/movies
