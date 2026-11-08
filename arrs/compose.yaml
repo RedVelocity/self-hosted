@@ -32,22 +32,19 @@ services:
     restart: unless-stopped
     labels:
       - traefik.enable=true
-      # qbittorrent theme
-      - 'traefik.http.middlewares.qbit-theme.plugin.rewrite-body.rewrites[0].regex=</head>'
-      - 'traefik.http.middlewares.qbit-theme.plugin.rewrite-body.rewrites[0].replacement=<link rel="stylesheet" type="text/css" href="https://theme-park.dev/css/base/qbittorrent/overseerr.css"></head>'
-      - 'traefik.http.routers.qb.middlewares=qbit-theme'
-      # prowlarr theme
-      - 'traefik.http.middlewares.prowlarr-theme.plugin.rewrite-body.rewrites[0].regex=</head>'
-      - 'traefik.http.middlewares.prowlarr-theme.plugin.rewrite-body.rewrites[0].replacement=<link rel="stylesheet" type="text/css" href="https://theme-park.dev/css/base/prowlarr/overseerr.css"></head>'
-      - 'traefik.http.routers.prowlarr.middlewares=prowlarr-theme'
-      # radarr theme
-      - 'traefik.http.middlewares.radarr-theme.plugin.rewrite-body.rewrites[0].regex=</head>'
-      - 'traefik.http.middlewares.radarr-theme.plugin.rewrite-body.rewrites[0].replacement=<link rel="stylesheet" type="text/css" href="https://theme-park.dev/css/base/radarr/overseerr.css"></head>'
-      - 'traefik.http.routers.radarr.middlewares=radarr-theme'
-      # sonarr theme
-      - 'traefik.http.middlewares.sonarr-theme.plugin.rewrite-body.rewrites[0].regex=</head>'
-      - 'traefik.http.middlewares.sonarr-theme.plugin.rewrite-body.rewrites[0].replacement=<link rel="stylesheet" type="text/css" href="https://theme-park.dev/css/base/sonarr/overseerr.css"></head>'
-      - 'traefik.http.routers.sonarr.middlewares=sonarr-theme'
+      # themes
+      - traefik.http.middlewares.qb-theme.plugin.themepark.app=qbittorrent
+      - traefik.http.middlewares.qb-theme.plugin.themepark.theme=overseerr
+      - traefik.http.routers.qb.middlewares=qb-theme
+      - traefik.http.middlewares.prowlarr-theme.plugin.themepark.app=prowlarr
+      - traefik.http.middlewares.prowlarr-theme.plugin.themepark.theme=overseerr
+      - traefik.http.routers.prowlarr.middlewares=prowlarr-theme
+      - traefik.http.middlewares.radarr-theme.plugin.themepark.app=radarr
+      - traefik.http.middlewares.radarr-theme.plugin.themepark.theme=overseerr
+      - traefik.http.routers.radarr.middlewares=radarr-theme
+      - traefik.http.middlewares.sonarr-theme.plugin.themepark.app=sonarr
+      - traefik.http.middlewares.sonarr-theme.plugin.themepark.theme=overseerr
+      - traefik.http.routers.sonarr.middlewares=sonarr-theme
       # qbittorrent
       - traefik.http.routers.qb.entrypoints=websecure
       - traefik.http.routers.qb.rule=Host(`qb.${ARRS_HOST}`)
