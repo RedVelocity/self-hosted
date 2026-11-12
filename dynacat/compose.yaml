@@ -1,5 +1,5 @@
 services:
-  glance:
+  dynacat:
     container_name: dynacat
     image: panonim/dynacat:latest
     restart: unless-stopped
