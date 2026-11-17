@@ -19,9 +19,9 @@ services:
     restart: unless-stopped
     labels:
       - traefik.enable=true
-      - traefik.http.routers.traefik.entrypoints=websecure
-      - traefik.http.routers.traefik.rule=Host(`${TRAEFIK_HOST}`)
-      - traefik.http.services.traefik.loadbalancer.server.port=8080
+      # - traefik.http.routers.traefik.entrypoints=websecure
+      # - traefik.http.routers.traefik.rule=Host(`${TRAEFIK_HOST}`)
+      # - traefik.http.services.traefik.loadbalancer.server.port=8080
       - traefik.http.routers.traefik-secure.tls=true
       - traefik.http.routers.traefik-secure.tls.certresolver=cloudflare
       # Base URL of your domain example.com

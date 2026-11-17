@@ -29,7 +29,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.sst.entrypoints=websecure
-      - traefik.http.routers.sst.rule=Host(`sst.${HOST}`)
+      - traefik.http.routers.sst.rule=Host(`${SST_HOST}`)
       - traefik.http.routers.sst.service=sst
       - traefik.http.routers.sst.tls=true
       - traefik.http.services.sst.loadbalancer.server.port=3000

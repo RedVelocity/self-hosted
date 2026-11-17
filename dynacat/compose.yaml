@@ -18,7 +18,7 @@ services:
     labels:
       - traefik.enable=true
       - traefik.http.routers.dynacat.entrypoints=websecure
-      - traefik.http.routers.dynacat.rule=Host(`dash.esh.redvelo.city`)
+      - traefik.http.routers.dynacat.rule=Host(`${GLANCE_HOST}`)
       - traefik.http.routers.dynacat.tls=true
       - dockhand.skip.cooldown=true
 

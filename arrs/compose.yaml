@@ -15,6 +15,7 @@ services:
       - VPN_PORT_FORWARDING=on
       - PORT_FORWARD_ONLY=true
       - SERVER_REGIONS=${SERVER_REGIONS}
+      - TZ=${TZ}
     ports:
       - 8888:8888/tcp # HTTP proxy
       - 8388:8388/tcp # Shadowsocks
@@ -81,7 +82,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/Madrid
+      - TZ=${TZ}
       - WEBUI_PORT=8080
       # - DOCKER_MODS=ghcr.io/vuetorrent/vuetorrent-lsio-mod
       # - DOCKER_MODS=ghcr.io/themepark-dev/theme.park:qbittorrent
@@ -105,7 +106,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/Madrid
+      - TZ=${TZ}
       # - DOCKER_MODS=ghcr.io/themepark-dev/theme.park:prowlarr
       # - TP_THEME=overseerr
     volumes:
@@ -118,7 +119,7 @@ services:
     image: ghcr.io/flaresolverr/flaresolverr:latest
     container_name: flaresolverr
     environment:
-      - TZ=Europe/Madrid
+      - TZ=${TZ}
       - HEADLESS=true
     volumes:
       - ${STACKS_PATH}/arrs/flaresolver/config:/config
@@ -130,7 +131,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/Madrid
+      - TZ=${TZ}
       # - DOCKER_MODS=ghcr.io/themepark-dev/theme.park:sonarr
       # - TP_THEME=overseerr
     volumes:
@@ -149,7 +150,7 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=Europe/Madrid
+      - TZ=${TZ}
       # - DOCKER_MODS=ghcr.io/themepark-dev/theme.park:radarr
       # - TP_THEME=overseerr
     volumes:
