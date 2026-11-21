@@ -1,7 +1,7 @@
 ---
 services:
   adguardhome:
-    image: adguard/adguardhome
+    image: adguard/adguardhome:${ADGUARD_VERSION:-latest}
     container_name: adguard
     restart: unless-stopped
     networks:

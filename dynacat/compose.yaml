@@ -1,7 +1,7 @@
 services:
   dynacat:
     container_name: dynacat
-    image: panonim/dynacat:latest
+    image: panonim/dynacat:${DYNACAT_VERSION:-latest}
     restart: unless-stopped
     volumes:
       - ${STACKS_PATH}/dynacat/config:/app/config
